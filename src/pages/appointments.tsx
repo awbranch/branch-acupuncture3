@@ -3,11 +3,11 @@ import Main from 'layouts/Main';
 import Container from 'components/Container';
 import Typography from '@mui/material/Typography';
 
-const Contact: NextPage = () => {
+const Appointments: NextPage = () => {
   return (
     <Main>
       <Container>
-        <Typography variant="h1">Contact</Typography>
+        <Typography variant="h1">Appointments</Typography>
         <Typography variant="body1">
           Sed ut perspiciatis unde omnis iste natus error sit voluptatem
           accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
@@ -28,4 +28,4 @@ const Contact: NextPage = () => {
   );
 };
 
-export default Contact;
+export default Appointments;

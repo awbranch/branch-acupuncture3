@@ -7,7 +7,8 @@ const Footer = (): JSX.Element => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Typography variant={'subtitle2'} color="text.secondary" gutterBottom>
-          &copy; Company. {new Date().getFullYear()}. All rights reserved
+          &copy; Branch Acupuncture Center. {new Date().getFullYear()}. All
+          rights reserved
         </Typography>
         <Typography variant={'caption'} color="text.secondary" component={'p'}>
           When you visit or interact with our sites, services or tools, we or

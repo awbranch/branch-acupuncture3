@@ -23,14 +23,28 @@ const Topbar = ({ onSidebarOpen }: Props): JSX.Element => {
         <Box
           display={'flex'}
           component="a"
-          title="TODO:Logo Title"
+          title="Branch Acupuncture Center"
           width={{ xs: 100, md: 120 }}
         >
-          <Box component={'img'} src="/logo.svg" height={1} width={1} />
+          <Box component={'img'} src="/logo-dark.svg" height={1} width={1} />
         </Box>
       </NextLink>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
         <Box>
+          <NextLink href="/services" passHref>
+            <Link underline="none" component="a" color="text.primary">
+              Services
+            </Link>
+          </NextLink>
+        </Box>
+        <Box marginLeft={3}>
+          <NextLink href="/theory" passHref>
+            <Link underline="none" component="a" color="text.primary">
+              Theory
+            </Link>
+          </NextLink>
+        </Box>
+        <Box marginLeft={3}>
           <NextLink href="/about" passHref>
             <Link underline="none" component="a" color="text.primary">
               About
@@ -38,16 +52,9 @@ const Topbar = ({ onSidebarOpen }: Props): JSX.Element => {
           </NextLink>
         </Box>
         <Box marginLeft={3}>
-          <NextLink href="/contact" passHref>
+          <NextLink href="/appointments" passHref>
             <Link underline="none" component="a" color="text.primary">
-              Contact
-            </Link>
-          </NextLink>
-        </Box>
-        <Box marginLeft={3}>
-          <NextLink href="/help" passHref>
-            <Link underline="none" component="a" color="text.primary">
-              Help
+              Appointments
             </Link>
           </NextLink>
         </Box>

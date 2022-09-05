@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <title>MyApp Title</title>
+        <title>Branch Acupuncture Center</title>
       </Head>
       <Page>
         <Component {...pageProps} />

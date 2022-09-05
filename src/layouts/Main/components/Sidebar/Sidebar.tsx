@@ -17,19 +17,24 @@ interface Props {
 const Sidebar = ({ open, variant, onClose }: Props): JSX.Element => {
   const router = useRouter();
 
+  const services = () => {
+    onClose();
+    router.push(`/services`);
+  };
+
+  const theory = () => {
+    onClose();
+    router.push(`/theory`);
+  };
+
   const about = () => {
     onClose();
     router.push(`/about`);
   };
 
-  const contact = () => {
+  const appointments = () => {
     onClose();
-    router.push(`/contact`);
-  };
-
-  const help = () => {
-    onClose();
-    router.push(`/help`);
+    router.push(`/appointments`);
   };
 
   return (
@@ -61,9 +66,10 @@ const Sidebar = ({ open, variant, onClose }: Props): JSX.Element => {
           </IconButton>
         </Box>
         <Stack spacing={2}>
+          <Button onClick={services}>Services</Button>
+          <Button onClick={theory}>Theory</Button>
           <Button onClick={about}>About</Button>
-          <Button onClick={contact}>Contact</Button>
-          <Button onClick={help}>Help</Button>
+          <Button onClick={appointments}>Appointments</Button>
           <Divider />
         </Stack>
       </Box>
