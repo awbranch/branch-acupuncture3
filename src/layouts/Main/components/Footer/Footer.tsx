@@ -11,10 +11,11 @@ const Footer = (): JSX.Element => {
           rights reserved
         </Typography>
         <Typography variant={'caption'} color="text.secondary" component={'p'}>
-          When you visit or interact with our sites, services or tools, we or
-          our authorised service providers may use cookies for storing
-          information to help provide you with a better, faster and safer
-          experience and for marketing purposes.
+          The information on this site is for educational purposes only. This
+          information is not intended to diagnose, treat, cure, or prevent any
+          disease and is not a substitute for professional medical advice,
+          diagnosis, or treatment. Please see a licensed medical provider if you
+          believe you may have a medical condition.
         </Typography>
       </Grid>
     </Grid>
