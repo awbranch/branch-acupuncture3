@@ -11,7 +11,41 @@ const getTheme = (): Theme =>
       palette: mode === 'light' ? light : dark,
       shadows: shadows(mode),
       typography: {
-        fontFamily: '"Lato", sans-serif',
+        fontFamily: '"Libre Franklin", sans-serif',
+        h1: {
+          fontFamily: '"Raleway", sans-serif',
+          fontSize: '2.875rem',
+          letterSpacing: '0.8984rem',
+          lineHeight: 1.45,
+          fontWeight: 500,
+          textTransform: 'uppercase',
+        },
+        h2: {
+          fontFamily: '"Raleway", sans-serif',
+          fontSize: '2.25rem',
+          fontWeight: 700,
+          letterSpacing: '0.625rem',
+          lineHeight: 1.17,
+          textTransform: 'uppercase',
+        },
+        h3: {
+          fontFamily: '"Raleway", sans-serif',
+          fontSize: '1.5rem',
+          fontWeight: 600,
+          letterSpacing: '0.01042rem',
+          textTransform: 'uppercase',
+        },
+        body1: {
+          fontWeight: 300,
+          fontSize: '1rem',
+          lineHeight: 1.83,
+        },
+        body2: {
+          fontWeight: 300,
+          fontSize: '0.875rem',
+          lineHeight: 1.43,
+        },
+
         button: {
           textTransform: 'none',
           fontWeight: 'medium' as React.CSSProperties['fontWeight'],

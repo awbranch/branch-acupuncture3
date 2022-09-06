@@ -12,6 +12,7 @@ const ScheduleSession = (): JSX.Element => (
         color="primary"
         size="large"
         sx={{ textTransform: 'uppercase' }}
+        href="/appointments"
       >
         Schedule a Session
       </Button>

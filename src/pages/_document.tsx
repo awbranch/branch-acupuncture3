@@ -33,7 +33,7 @@ class MyDocument extends Document {
             content="Whatever your health goals may be, East Asian Medicine can help you achieve them. At Branch Acupuncture Center, we offer the wisdom of East Asian Medicine to help restore balance to your whole being. Molly Branch, owner, and licensed acupuncturist, provides natural healing modalities in a calm space to support mental and emotional health and well-being, pain management, preventative medicine, and oncology support."
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300..500&family=Raleway:wght@500..700&display=optional"
             rel="stylesheet"
           />
         </Head>
