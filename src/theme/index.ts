@@ -59,12 +59,13 @@ const getTheme = (): Theme =>
         MuiButton: {
           styleOverrides: {
             root: {
-              fontWeight: 400,
-              borderRadius: 5,
+              fontWeight: 500,
+              borderRadius: 23,
               paddingTop: 10,
               paddingBottom: 10,
+              paddingLeft: 50,
+              paddingRight: 50,
             },
-            containedSecondary: mode === 'light' ? { color: 'white' } : {},
           } as ComponentsOverrides['MuiButton'],
         },
         MuiInputBase: {

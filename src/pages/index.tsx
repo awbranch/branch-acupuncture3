@@ -37,7 +37,7 @@ const Home: NextPage = () => {
           <Button
             component={'a'}
             variant="contained"
-            color="primary"
+            color="secondary"
             size="large"
             sx={{ textTransform: 'uppercase' }}
           >
