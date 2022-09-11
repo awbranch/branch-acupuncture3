@@ -2,7 +2,10 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Page from 'components/Page';
 
-function MyApp({ Component, pageProps }: AppProps) {
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -19,4 +22,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default App;

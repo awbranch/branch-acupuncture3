@@ -5,6 +5,7 @@ import Section from 'components/Section';
 import ScheduleSession from 'components/ScheduleSession';
 import ServiceCard from 'components/ServiceCard';
 import Hero from 'components/Hero';
+import Reviews from 'components/Reviews';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -132,64 +133,10 @@ const Home: NextPage = () => {
         </Section>
 
         <Section>
-          <Typography variant="h2">What People Are Saying</Typography>
-          <Box sx={{ my: 4 }}>
-            <Typography variant="body1">
-              “Molly&lsquo;s insight and knowledge of her craft and the human
-              body are impressive. I have been able to take my painful days and
-              reduce them significantly, hoping to go even further. She always
-              provides results and addresses the whole picture in reference to
-              mind/body/spirit.“
-            </Typography>
-            <Typography variant="caption">— BAC Client</Typography>
-          </Box>
-
-          <Box sx={{ my: 4 }}>
-            <Typography variant="body1">
-              “Results. Molly has a wisdom about many problems, and I have been
-              fortunate to have several conditions improved because of her
-              knowledge and methods to treat medical problems.”
-            </Typography>
-            <Typography variant="caption">— BAC Client</Typography>
-          </Box>
-
-          <Box sx={{ my: 4 }}>
-            <Typography variant="body1">
-              “Molly is a true healer – she holistically looks at you as a
-              person and treats you accordingly. After each treatment, I am
-              floating. Certainly, would recommend her time and again.”
-            </Typography>
-            <Typography variant="caption">— BAC Client</Typography>
-          </Box>
-
-          <Box sx={{ my: 4 }}>
-            <Typography variant="body1">
-              “The very best!! She is so very cognizant of all your concerns!!”
-            </Typography>
-            <Typography variant="caption">— BAC Client</Typography>
-          </Box>
-
-          <Box sx={{ my: 4 }}>
-            <Typography variant="body1">
-              “Thank you for all the years of caring for me. You have done for
-              me things no one else in my life has. You came to me when I was
-              very sick, and you always have had faith that I would get better.
-              You are the most special person I know.”
-            </Typography>
-            <Typography variant="caption">— BAC Client</Typography>
-          </Box>
-
-          <Box sx={{ my: 4 }}>
-            <Typography variant="body1">
-              “You have been a light to me in my quest to be and stay healthy as
-              I know you have been to others. Your gentle ways, the manner in
-              which you listen to your patients and your warmth and caring
-              nature and that of your staff could be a model for any medical
-              staff. I always felt healing begin immediately as I put my hand on
-              the entry door.”
-            </Typography>
-            <Typography variant="caption">— BAC Client</Typography>
-          </Box>
+          <Typography variant="h2" sx={{ textAlign: 'center', mt: 20 }}>
+            What People Are Saying
+          </Typography>
+          <Reviews />
         </Section>
       </Container>
     </Main>

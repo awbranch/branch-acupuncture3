@@ -23,7 +23,7 @@ const getTheme = (): Theme =>
         },
         h2: {
           fontFamily: '"Raleway", sans-serif',
-          fontSize: '2.25rem',
+          fontSize: '2rem',
           fontWeight: 700,
           letterSpacing: '0.625rem',
           lineHeight: 1.17,
@@ -39,7 +39,7 @@ const getTheme = (): Theme =>
         },
         body1: {
           fontWeight: 300,
-          fontSize: '1rem',
+          fontSize: '1.25rem',
           lineHeight: 1.83,
         },
         body2: {

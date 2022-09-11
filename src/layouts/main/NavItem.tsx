@@ -25,7 +25,7 @@ const NavItem = ({ title, link, colorInvert }: Props): JSX.Element => {
           underline={hasActiveLink ? 'always' : 'none'}
           component="a"
           color={linkColor}
-          sx={{ fontWeight: 400 }}
+          sx={{ fontSize: '1rem', fontWeight: 400 }}
         >
           {title}
         </Link>
