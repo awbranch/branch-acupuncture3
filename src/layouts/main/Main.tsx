@@ -5,30 +5,18 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import AppBar from '@mui/material/AppBar';
-import Slide from '@mui/material/Slide';
 
 import Container from 'components/Container';
-import { Topbar, Sidebar, Footer } from './components';
+import Topbar from './Topbar';
+import Footer from './Footer';
+import Sidebar from './Sidebar';
 
 interface Props {
   children: React.ReactNode;
+  colorInvert?: boolean;
 }
 
-interface HideOnScrollProps {
-  children: React.ReactElement<any, any>;
-}
-
-const HideOnScroll = ({ children }: HideOnScrollProps): JSX.Element => {
-  const trigger = useScrollTrigger();
-
-  return (
-    <Slide appear={false} direction="down" in={!trigger}>
-      {children}
-    </Slide>
-  );
-};
-
-const Main = ({ children }: Props): JSX.Element => {
+const Main = ({ children, colorInvert = false }: Props): JSX.Element => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
@@ -36,11 +24,16 @@ const Main = ({ children }: Props): JSX.Element => {
 
   const [openSidebar, setOpenSidebar] = useState(false);
 
-  const handleSidebarOpen = (): void => {
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 38,
+  });
+
+  const handleSidebarOpen = () => {
     setOpenSidebar(true);
   };
 
-  const handleSidebarClose = (): void => {
+  const handleSidebarClose = () => {
     setOpenSidebar(false);
   };
 
@@ -48,19 +41,22 @@ const Main = ({ children }: Props): JSX.Element => {
 
   return (
     <Box>
-      <HideOnScroll>
-        <AppBar
-          position={'fixed'}
-          sx={{
-            backgroundColor: theme.palette.background.paper,
-          }}
-          elevation={1}
-        >
-          <Container paddingY={{ xs: 1, sm: 1.5 }}>
-            <Topbar onSidebarOpen={handleSidebarOpen} />
-          </Container>
-        </AppBar>
-      </HideOnScroll>
+      <AppBar
+        position={'fixed'}
+        sx={{
+          backgroundColor: trigger
+            ? theme.palette.background.paper
+            : 'transparent',
+        }}
+        elevation={trigger ? 1 : 0}
+      >
+        <Container paddingY={{ xs: 1, sm: 1.5 }}>
+          <Topbar
+            onSidebarOpen={handleSidebarOpen}
+            colorInvert={trigger ? false : colorInvert}
+          />
+        </Container>
+      </AppBar>
       <Sidebar onClose={handleSidebarClose} open={open} variant="temporary" />
       <main>
         <Box height={{ xs: 58, sm: 66 }} />

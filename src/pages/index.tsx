@@ -1,9 +1,10 @@
 import type { NextPage } from 'next';
-import Main from 'layouts/Main';
+import Main from 'layouts/main/Main';
 import Container from 'components/Container';
 import Section from 'components/Section';
 import ScheduleSession from 'components/ScheduleSession';
 import ServiceCard from 'components/ServiceCard';
+import Hero from 'components/Hero';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -12,13 +13,18 @@ import Typography from '@mui/material/Typography';
 
 const Home: NextPage = () => {
   return (
-    <Main>
-      <Container>
-        <Typography variant="h1">Branch Acupuncture Center</Typography>
-        <Typography variant="body1" sx={{ mt: 2, fontSize: '120%' }}>
+    <Main colorInvert={true}>
+      <Hero image="/hero/gettyimages-678836035-170667a.jpg">
+        <Typography variant="h1" sx={{ color: 'common.white' }}>
+          Branch Acupuncture Center
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{ mt: 2, fontSize: '120%', color: 'common.white' }}
+        >
           Wisdom of East Asian Medicine for Every Unique Individual
         </Typography>
-        <Typography variant="body1" sx={{ mt: 2 }}>
+        <Typography variant="body1" sx={{ mt: 2, color: 'common.white' }}>
           Whatever your health goals may be, East Asian Medicine can help you
           achieve them. At Branch Acupuncture Center, we offer the wisdom of
           East Asian Medicine to help restore balance to your whole being. Molly
@@ -38,6 +44,8 @@ const Home: NextPage = () => {
             More
           </Button>
         </Box>
+      </Hero>
+      <Container>
         <Section>
           <Typography variant="h2">Welcome</Typography>
           <Typography variant="body1">

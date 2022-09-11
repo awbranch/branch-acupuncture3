@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import Main from 'layouts/Main';
+import Main from 'layouts/main/Main';
 import Container from 'components/Container';
 import Typography from '@mui/material/Typography';
 
