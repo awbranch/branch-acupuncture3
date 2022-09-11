@@ -18,12 +18,6 @@ const NavItem = ({ title, link, colorInvert }: Props): JSX.Element => {
   const hasActiveLink = activeLink.indexOf(link) === 0;
   const linkColor = colorInvert ? 'common.white' : 'text.primary';
 
-  console.log(
-    `activeLink: ${activeLink} - link: ${link} - hasActiveLink: ${hasActiveLink} `,
-  );
-
-  console.log(`Active Link: ${activeLink}`);
-
   return (
     <Box>
       <NextLink href={link} passHref>

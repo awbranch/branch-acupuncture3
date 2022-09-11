@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
 }
 

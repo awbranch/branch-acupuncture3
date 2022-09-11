@@ -19,6 +19,7 @@ const getTheme = (): Theme =>
           lineHeight: 1.45,
           fontWeight: 500,
           textTransform: 'uppercase',
+          marginBottom: '1.5rem',
         },
         h2: {
           fontFamily: '"Raleway", sans-serif',
@@ -27,6 +28,7 @@ const getTheme = (): Theme =>
           letterSpacing: '0.625rem',
           lineHeight: 1.17,
           textTransform: 'uppercase',
+          marginBottom: '1rem',
         },
         h3: {
           fontFamily: '"Raleway", sans-serif',

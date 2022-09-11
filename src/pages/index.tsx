@@ -12,6 +12,21 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 const Home: NextPage = () => {
+  const scrollTo = (id: string): void => {
+    setTimeout(() => {
+      const element: HTMLElement = document.querySelector(`#${id}`);
+      if (!element) {
+        return;
+      }
+
+      window.scrollTo({
+        left: 0,
+        top: element.offsetTop - 80,
+        behavior: 'smooth',
+      });
+    });
+  };
+
   return (
     <Main colorInvert={true}>
       <Hero image="/hero/gettyimages-678836035-170667a.jpg">
@@ -20,11 +35,12 @@ const Home: NextPage = () => {
         </Typography>
         <Typography
           variant="body1"
+          paragraph
           sx={{ mt: 2, fontSize: '120%', color: 'common.white' }}
         >
           Wisdom of East Asian Medicine for Every Unique Individual
         </Typography>
-        <Typography variant="body1" sx={{ mt: 2, color: 'common.white' }}>
+        <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
           Whatever your health goals may be, East Asian Medicine can help you
           achieve them. At Branch Acupuncture Center, we offer the wisdom of
           East Asian Medicine to help restore balance to your whole being. Molly
@@ -33,22 +49,23 @@ const Home: NextPage = () => {
           well-being, pain management, preventative medicine, and oncology
           support.
         </Typography>
-        <Box component="div" sx={{ m: 2, textAlign: 'center' }}>
+        <Box component="div" sx={{ m: 5, textAlign: 'center' }}>
           <Button
             component={'a'}
             variant="contained"
             color="secondary"
             size="large"
             sx={{ textTransform: 'uppercase' }}
+            onClick={() => scrollTo('welcome')}
           >
             More
           </Button>
         </Box>
       </Hero>
       <Container>
-        <Section>
+        <Section id="welcome">
           <Typography variant="h2">Welcome</Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" paragraph>
             At Branch Acupuncture Center, we consider each unique client as an
             individual - full of special knowledge, innate wisdom, and
             compassion. My love for traditional medicine stems from its basis
@@ -57,7 +74,7 @@ const Home: NextPage = () => {
             part. Traditional medicine views any symptom, injury, or condition
             as a sign that the body is out of harmony. Acupuncture and East
             Asian Medicine enable the body to return to balance effectively and
-            safely, with fewer symptoms and better future conditions.{' '}
+            safely, with fewer symptoms and better future conditions.
           </Typography>
         </Section>
         <ScheduleSession />
