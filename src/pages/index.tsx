@@ -30,7 +30,7 @@ const Home: NextPage = () => {
 
   return (
     <Main colorInvert={true}>
-      <Hero image="/hero/gettyimages-678836035-170667a.jpg">
+      <Hero image="/hero/home.jpg">
         <Typography variant="h1" sx={{ color: 'common.white' }}>
           Branch Acupuncture Center
         </Typography>
@@ -89,7 +89,7 @@ const Home: NextPage = () => {
             <Grid item sm={4}>
               <ServiceCard
                 title="Acupuncture"
-                image="gettyimages-97538838-170667a.jpg"
+                image="acupuncture.jpg"
                 link="/services#acupuncture"
               />
             </Grid>
@@ -97,35 +97,35 @@ const Home: NextPage = () => {
             <Grid item sm={4}>
               <ServiceCard
                 title="Herbal Medicine"
-                image="gettyimages-1316967405-170667a.jpg"
+                image="herbal-medicine.jpg"
                 link="/services#herbal-medicine"
               />
             </Grid>
             <Grid item sm={4}>
               <ServiceCard
                 title="Cupping and Gua Sha"
-                image="gettyimages-523356878-170667a.jpg"
+                image="cupping-gua-sha.jpg"
                 link="/services#cupping-gua-sha"
               />
             </Grid>
             <Grid item sm={4}>
               <ServiceCard
                 title="Moxibustion"
-                image="gettyimages-1145617216-170667a.jpg"
+                image="moxibustion.jpg"
                 link="/services#moxibustion"
               />
             </Grid>
             <Grid item sm={4}>
               <ServiceCard
                 title="Nutrition"
-                image="gettyimages-1345368999-170667a.jpg"
+                image="nutrition.jpg"
                 link="/services#nutrition"
               />
             </Grid>
             <Grid item sm={4}>
               <ServiceCard
                 title="Laser Acupuncture"
-                image="gettyimages-1214880959-170667a.jpg"
+                image="laser-acupuncture.jpg"
                 link="/services#laser-acupuncture"
               />
             </Grid>
