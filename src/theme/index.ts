@@ -32,10 +32,21 @@ const getTheme = (): Theme =>
         },
         h3: {
           fontFamily: '"Raleway", sans-serif',
-          fontSize: '1.5rem',
+          fontSize: '1.25rem',
           fontWeight: 600,
-          letterSpacing: '0.01042rem',
+          letterSpacing: '0.2rem',
           textTransform: 'uppercase',
+        },
+        h4: {
+          fontFamily: '"Raleway", sans-serif',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1rem',
+          fontSize: '0.9rem',
+        },
+        h5: {
+          fontFamily: '"Raleway", sans-serif',
+          letterSpacing: '0.1rem',
+          fontSize: '1.5rem',
         },
         body1: {
           fontWeight: 300,
@@ -49,6 +60,7 @@ const getTheme = (): Theme =>
         },
 
         button: {
+          fontFamily: '"Raleway", sans-serif',
           textTransform: 'none',
           fontWeight: 'medium' as React.CSSProperties['fontWeight'],
         },

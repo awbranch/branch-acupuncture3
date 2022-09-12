@@ -9,7 +9,6 @@ import Reviews from 'components/Reviews';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-
 import Typography from '@mui/material/Typography';
 
 const Home: NextPage = () => {
@@ -35,9 +34,10 @@ const Home: NextPage = () => {
           Branch Acupuncture Center
         </Typography>
         <Typography
-          variant="body1"
+          component="p"
+          variant="h5"
           paragraph
-          sx={{ mt: 2, fontSize: '120%', color: 'common.white' }}
+          sx={{ mt: 2, color: 'common.white' }}
         >
           Wisdom of East Asian Medicine for Every Unique Individual
         </Typography>

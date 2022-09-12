@@ -15,7 +15,7 @@ interface Props {
 const ServiceCard = ({ title, image, link }: Props): JSX.Element => (
   <Card sx={{ maxWidth: 250, mx: 'auto' }}>
     <CardContent>
-      <Typography gutterBottom variant="h5" component="div">
+      <Typography gutterBottom variant="h3" component="div">
         {title}
       </Typography>
     </CardContent>
