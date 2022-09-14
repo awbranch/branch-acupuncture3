@@ -14,10 +14,10 @@
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.3",
-    "jarallax": "^2.0.4",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-lazy-load-image-component": "^1.5.5",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1"
   },

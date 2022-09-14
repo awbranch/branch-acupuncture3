@@ -43,7 +43,7 @@ const getTheme = (): Theme =>
           letterSpacing: '0.1rem',
           fontSize: '0.9rem',
         },
-        h5: {
+        subtitle1: {
           fontFamily: '"Raleway", sans-serif',
           letterSpacing: '0.1rem',
           fontSize: '1.5rem',

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
@@ -9,51 +9,19 @@ interface Props {
 }
 
 const Hero = ({ image, children }: Props): JSX.Element => {
-  useEffect(() => {
-    const jarallaxInit = async () => {
-      const jarallaxElems = document.querySelectorAll('.jarallax');
-      if (!jarallaxElems || (jarallaxElems && jarallaxElems.length === 0)) {
-        return;
-      }
-
-      const { jarallax } = await import('jarallax');
-      jarallax(jarallaxElems, { speed: 0.2 });
-    };
-
-    jarallaxInit();
-  });
-
   return (
     <Box
-      className={'jarallax'}
-      data-jarallax
-      data-speed="0.2"
-      position={'relative'}
-      minHeight={{ xs: 400, sm: 500, md: 600 }}
-      display={'flex'}
-      alignItems={'center'}
-      marginTop={-13}
-      paddingTop={13}
-      id="agency__portfolio-item--js-scroll"
+      position="relative"
+      sx={{
+        objectFit: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        backgroundImage: `url(${image})`,
+      }}
+      marginTop={-9}
+      paddingTop={9}
     >
-      <Box
-        className={'jarallax-img'}
-        sx={{
-          position: 'absolute',
-          objectFit: 'cover',
-          /* support for plugin https://github.com/bfred-it/object-fit-images */
-          fontFamily: 'object-fit: cover;',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: -1,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundImage: `url(${image})`,
-        }}
-      />
       <Box
         sx={{
           position: 'absolute',

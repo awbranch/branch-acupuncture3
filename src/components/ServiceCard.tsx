@@ -1,10 +1,9 @@
 import React from 'react';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+import NextLink from 'next/link';
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Link from '@mui/material/Link';
 
 interface Props {
   title: string;
@@ -13,24 +12,38 @@ interface Props {
 }
 
 const ServiceCard = ({ title, image, link }: Props): JSX.Element => (
-  <Card sx={{ maxWidth: 250, mx: 'auto' }}>
-    <CardContent>
-      <Typography gutterBottom variant="h3" component="div">
-        {title}
-      </Typography>
-    </CardContent>
-    <CardMedia
-      component="img"
-      height="140"
-      image={`/services/${image}`}
-      alt={title}
-    />
-    <CardActions>
-      <Button size="small" component="a" href={link}>
-        Learn More
-      </Button>
-    </CardActions>
-  </Card>
+  <NextLink href={link} passHref>
+    <Link sx={{ textDecoration: 'none !important' }}>
+      <Box
+        padding={2}
+        bgcolor={'background.paper'}
+        borderRadius={2}
+        overflow={'hidden'}
+        boxShadow={3}
+        marginBottom={2}
+      >
+        <Box
+          component={LazyLoadImage}
+          effect="blur"
+          src={`/services/${image}`}
+          alt={title}
+          height={1}
+          width={1}
+          sx={{
+            transition: 'opacity, transform ease 0.3s !important',
+            filter: 'grayscale(100%)',
+            '&:hover': {
+              transform: 'scale(1.02)',
+              filter: 'none',
+            },
+          }}
+        />
+        <Box display={'flex'} justifyContent={'center'}>
+          <Typography variant={'body1'}>{title}</Typography>
+        </Box>
+      </Box>
+    </Link>
+  </NextLink>
 );
 
 export default ServiceCard;

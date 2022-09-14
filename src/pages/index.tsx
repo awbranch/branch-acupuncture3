@@ -35,7 +35,7 @@ const Home: NextPage = () => {
         </Typography>
         <Typography
           component="p"
-          variant="h5"
+          variant="subtitle1"
           paragraph
           sx={{ mt: 2, color: 'common.white' }}
         >
