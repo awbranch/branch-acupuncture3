@@ -30,7 +30,9 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }: Props): JSX.Element => {
         >
           <Box
             component={'img'}
-            src={colorInvert ? '/logo-light.svg' : '/logo-dark.svg'}
+            src={
+              colorInvert ? '/logo-w-text-white.svg' : '/logo-w-text-black.svg'
+            }
             height={1}
             width={1}
           />

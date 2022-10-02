@@ -4,9 +4,43 @@ import { useRouter } from 'next/router';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+
+const Menu = [
+  {
+    name: 'Home',
+    href: '/',
+  },
+  {
+    name: 'Services',
+    href: '/services',
+  },
+  {
+    name: 'Theory',
+    href: '/theory',
+  },
+  {
+    name: 'About',
+    href: '/about',
+  },
+  {
+    name: 'Appointments',
+    href: '/appointments',
+  },
+  {
+    name: 'Testimonials',
+    href: '/#testimonials',
+  },
+  {
+    name: 'Questions',
+    href: '/appointments#questions',
+  },
+  {
+    name: 'Contact',
+    href: '/about#contact',
+  },
+];
 
 interface Props {
   onClose: () => void;
@@ -17,24 +51,9 @@ interface Props {
 const Sidebar = ({ open, variant, onClose }: Props): JSX.Element => {
   const router = useRouter();
 
-  const services = () => {
+  const goToLink = (href: string) => {
     onClose();
-    router.push(`/services`);
-  };
-
-  const theory = () => {
-    onClose();
-    router.push(`/theory`);
-  };
-
-  const about = () => {
-    onClose();
-    router.push(`/about`);
-  };
-
-  const appointments = () => {
-    onClose();
-    router.push(`/appointments`);
+    router.push(href);
   };
 
   return (
@@ -66,11 +85,11 @@ const Sidebar = ({ open, variant, onClose }: Props): JSX.Element => {
           </IconButton>
         </Box>
         <Stack spacing={2}>
-          <Button onClick={services}>Services</Button>
-          <Button onClick={theory}>Theory</Button>
-          <Button onClick={about}>About</Button>
-          <Button onClick={appointments}>Appointments</Button>
-          <Divider />
+          {Menu.map((m) => (
+            <Button key={m.name} onClick={() => goToLink(m.href)}>
+              {m.name}
+            </Button>
+          ))}
         </Stack>
       </Box>
     </Drawer>

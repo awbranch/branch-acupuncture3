@@ -40,7 +40,14 @@ const Main = ({ children, colorInvert = false }: Props): JSX.Element => {
   const open = isMd ? false : openSidebar;
 
   return (
-    <Box>
+    <Box
+      sx={{
+        height: '100vh',
+        margin: '0',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <AppBar
         position={'fixed'}
         sx={{
@@ -63,9 +70,7 @@ const Main = ({ children, colorInvert = false }: Props): JSX.Element => {
         {children}
         <Divider />
       </main>
-      <Container paddingY={4}>
-        <Footer />
-      </Container>
+      <Footer />
     </Box>
   );
 };
