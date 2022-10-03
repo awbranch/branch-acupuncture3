@@ -86,6 +86,7 @@ const getTheme = (): Theme =>
           styleOverrides: {
             root: {
               borderRadius: 5,
+              background: 'white',
             },
           } as ComponentsOverrides['MuiInputBase'],
         },

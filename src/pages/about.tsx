@@ -3,6 +3,8 @@ import Main from 'layouts/main/Main';
 import Container from 'components/Container';
 import Typography from '@mui/material/Typography';
 
+import ContactUs from 'components/ContactUs';
+
 const About: NextPage = () => {
   return (
     <Main>
@@ -24,6 +26,7 @@ const About: NextPage = () => {
           qui dolorem eum fugiat quo voluptas nulla pariatur?
         </Typography>
       </Container>
+      <ContactUs />
     </Main>
   );
 };
