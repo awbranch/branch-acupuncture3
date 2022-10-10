@@ -2,30 +2,70 @@ import type { NextPage } from 'next';
 import Main from 'layouts/main/Main';
 import Container from 'components/Container';
 import Typography from '@mui/material/Typography';
+import path from 'path';
+import { promises as fs } from 'fs';
+import Section from '../components/Section';
+import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 
-const Theory: NextPage = () => {
+interface Props {
+  elements: Array<Element>;
+}
+
+const Theory: NextPage = ({ elements }: Props) => {
+  const theme = useTheme();
+
   return (
     <Main>
       <Container>
-        <Typography variant="h1">Theory</Typography>
-        <Typography variant="body1">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-          ab illo inventore veritatis et quasi architecto beatae vitae dicta
-          sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-          aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-          qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-          dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
-          quia non numquam eius modi tempora incidunt ut labore et dolore magnam
-          aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-          exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex
-          ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in
-          ea voluptate velit esse quam nihil molestiae consequatur, vel illum
-          qui dolorem eum fugiat quo voluptas nulla pariatur?
-        </Typography>
+        <Section>
+          <Typography variant="h1">Five Element Theory</Typography>
+          <Typography variant="body1" paragraph>
+            East Asian Medicine views the body as a small universe with five
+            major interconnected systems. Each system is represented by an
+            element: Wood, Fire, Earth, Metal, and Water. Five elements theory
+            is a framework used in East Asian Medicine to explain how the world
+            and weather around us influence us and how body organs interact.
+            Each element is associated with specific body organs, color, taste,
+            emotion, and year season, among other things.{' '}
+          </Typography>
+          <Typography variant="body1" paragraph>
+            From an East Asian Medicine perspective, understanding which of the
+            five elements has a dominant effect on you can give you insight into
+            your strengths and weaknesses. When our body is in balance, these
+            systems flow smoothly. When one or more systems fall out of balance,
+            symptoms emerge, resulting in illness. Acupuncture and East Asian
+            modalities can restore the proper flow between systems, relieving
+            ailments and imbalances.{' '}
+          </Typography>
+        </Section>
+
+        {elements.map((element) => (
+          <Section key={element.id} id={element.id}>
+            <h2>{element.name}</h2>
+            <Typography variant="body1">{element.description}</Typography>
+            <Box
+              sx={{
+                width: '1000px',
+                height: '400px',
+                background: theme.palette.grey.A200,
+              }}
+            />
+            <Typography variant="caption">{element.caption}</Typography>
+          </Section>
+        ))}
       </Container>
     </Main>
   );
 };
+
+export async function getServerSideProps() {
+  const file = path.join(process.cwd(), 'data', 'elements.json');
+  const elements = JSON.parse(await fs.readFile(file, 'utf8'));
+
+  return {
+    props: { elements },
+  };
+}
 
 export default Theory;

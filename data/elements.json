@@ -1,0 +1,37 @@
+[
+  {
+    "id": "metal",
+    "name": "Metal",
+    "description": "The Metal element is known for high personal integrity, discipline, a rational approach to life, and a deep appreciation for beauty. A Metal deficiency creates the inability to grieve profoundly and feeling guarded or stuck. Metal governs the nose, sense of smell, skin, body hair, sweating, and coughs. A healthy Metal constitution is positively dynamic.",
+    "image": "metal.svg",
+    "caption": "When Metal constitution types are in balance, they have profound inner strength."
+  },
+  {
+    "id": "water",
+    "name": "Water",
+    "description": "There is an innate wisdom to the water element. However, in excess, water creates fear, and a deficiency of water creates fool heartiness. This element governs the bones, marrow, spine, and fertility and often relates to low back pain and hearing issues. Water in balance is quiet, peaceful, and wise.",
+    "image": "water.svg",
+    "caption": "Water constitution has strong willpower, a determined nature, and a tendency to be self-sufficient and independent."
+  },
+  {
+    "id": "wood",
+    "name": "Wood",
+    "description": "Like a tree, the Wood element tends to focus upwards and outwards. They are constantly striving for growth and expansion and looking for new challenges to overcome. When out of balance, they can quickly get stressed and have neck tightness, jaw clenching, and teeth grinding. Acupuncture can help return Wood constitution individuals to the generous leader they were born to be.",
+    "image": "wood.svg",
+    "caption": "When the Wood constitution is balanced, one excels at creating clear visions, goals, and plans and can pride themselves on decision-making skills."
+  },
+  {
+    "id": "fire",
+    "name": "Fire",
+    "description": "Fire constitution types inspire others with charisma, courage, creativity, wisdom, and intuition. Their natural tendency is to be joyful and to delight in the company of others. When out of balance, the Fire constitution may become over-excited and have trouble sleeping. ",
+    "image": "fire.svg",
+    "caption": "A Fire constitution in balance is energetic, passionate, and strong-willed."
+  },
+  {
+    "id": "earth",
+    "name": "Earth",
+    "description": "However, overly nurturing can cause imbalances in digestive issues and weight gain, poor muscle tone and mucus build-up, and obsessive thoughts, worry, and cravings for sweets with a tendency to gain weight. Acupuncture can help return the earth element to the nurturing-centered individual they were corn to be with clear and proper boundaries.",
+    "image": "earth.svg",
+    "caption": "The Earth type in balance is solid, nurturing, dependable, and a loyal friend who excels at forming long-term relationships and deep connections with others. When out of balance, they are prone to confusion and over-thinking"
+  }
+]

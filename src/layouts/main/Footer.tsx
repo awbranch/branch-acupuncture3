@@ -71,7 +71,7 @@ const Footer = (): JSX.Element => {
           />
         </Box>
 
-        <Box sx={{ display: { sm: 'none', md: 'block' } }}>
+        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
           <Stack direction="row" spacing={2} alignItems="center" sx={{ my: 3 }}>
             <Box component={'img'} src={'/logo-red.svg'} width={50} />
             <Typography

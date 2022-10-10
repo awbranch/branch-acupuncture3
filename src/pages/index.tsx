@@ -10,8 +10,14 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import path from 'path';
+import { promises as fs } from 'fs';
 
-const Home: NextPage = () => {
+interface Props {
+  services: Array<Service>;
+}
+
+const Home: NextPage = ({ services }: Props) => {
   const scrollTo = (id: string): void => {
     setTimeout(() => {
       const element: HTMLElement = document.querySelector(`#${id}`);
@@ -79,6 +85,7 @@ const Home: NextPage = () => {
           </Typography>
         </Section>
         <ScheduleSession />
+
         <Section>
           <Grid
             container
@@ -86,53 +93,19 @@ const Home: NextPage = () => {
             spacing={2}
             direction="row"
           >
-            <Grid item sm={4}>
-              <ServiceCard
-                title="Acupuncture"
-                image="acupuncture.jpg"
-                link="/services#acupuncture"
-              />
-            </Grid>
-
-            <Grid item sm={4}>
-              <ServiceCard
-                title="Herbal Medicine"
-                image="herbal-medicine.jpg"
-                link="/services#herbal-medicine"
-              />
-            </Grid>
-            <Grid item sm={4}>
-              <ServiceCard
-                title="Cupping and Gua Sha"
-                image="cupping-gua-sha.jpg"
-                link="/services#cupping-gua-sha"
-              />
-            </Grid>
-            <Grid item sm={4}>
-              <ServiceCard
-                title="Moxibustion"
-                image="moxibustion.jpg"
-                link="/services#moxibustion"
-              />
-            </Grid>
-            <Grid item sm={4}>
-              <ServiceCard
-                title="Nutrition"
-                image="nutrition.jpg"
-                link="/services#nutrition"
-              />
-            </Grid>
-            <Grid item sm={4}>
-              <ServiceCard
-                title="Laser Acupuncture"
-                image="laser-acupuncture.jpg"
-                link="/services#laser-acupuncture"
-              />
-            </Grid>
+            {services.map((service) => (
+              <Grid key={service.id} item xs={12} sm={6} md={4}>
+                <ServiceCard
+                  title={service.name}
+                  image={service.image}
+                  link={`/services#${service.id}`}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Section>
 
-        <Section>
+        <Section id="testimonials">
           <Typography variant="h2" sx={{ textAlign: 'center', mt: 20 }}>
             What People Are Saying
           </Typography>
@@ -142,5 +115,14 @@ const Home: NextPage = () => {
     </Main>
   );
 };
+
+export async function getServerSideProps() {
+  const file = path.join(process.cwd(), 'data', 'services.json');
+  const services = JSON.parse(await fs.readFile(file, 'utf8'));
+
+  return {
+    props: { services },
+  };
+}
 
 export default Home;
