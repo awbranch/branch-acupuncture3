@@ -42,7 +42,7 @@ const Theory: NextPage = ({ elements }: Props) => {
 
         {elements.map((element) => (
           <Section key={element.id} id={element.id}>
-            <h2>{element.name}</h2>
+            <Typography variant="h2">{element.name}</Typography>
             <Typography variant="body1">{element.description}</Typography>
             <Box
               sx={{

@@ -6,7 +6,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
 }
 
 const Section = ({ children, ...rest }: Props): JSX.Element => (
-  <Box component="section" sx={{ mt: '20px', pt: '60px' }} {...rest}>
+  <Box component="section" sx={{ pt: '80px' }} {...rest}>
     {children}
   </Box>
 );

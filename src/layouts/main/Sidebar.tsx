@@ -86,7 +86,11 @@ const Sidebar = ({ open, variant, onClose }: Props): JSX.Element => {
         </Box>
         <Stack spacing={2}>
           {Menu.map((m) => (
-            <Button key={m.name} onClick={() => goToLink(m.href)}>
+            <Button
+              key={m.name}
+              onClick={() => goToLink(m.href)}
+              sx={{ fontSize: '1.1rem' }}
+            >
               {m.name}
             </Button>
           ))}

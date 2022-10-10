@@ -62,10 +62,15 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }: Props): JSX.Element => {
             borderRadius: 2,
             minWidth: 'auto',
             padding: 1,
-            borderColor: alpha(theme.palette.divider, 0.2),
+            borderColor: colorInvert
+              ? alpha(theme.palette.secondary.main, 0.5)
+              : alpha(theme.palette.divider, 0.2),
           }}
         >
-          <MenuIcon />
+          <MenuIcon
+            color={colorInvert ? 'secondary' : 'primary'}
+            fontSize="small"
+          />
         </Button>
       </Box>
     </Box>

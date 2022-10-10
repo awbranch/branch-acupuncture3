@@ -6,14 +6,12 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import path from 'path';
 import { promises as fs } from 'fs';
-import { useTheme } from '@mui/material/styles';
 
 interface Props {
   services: Array<Service>;
 }
 
 const Services: NextPage = ({ services }: Props) => {
-  const theme = useTheme();
   return (
     <Main>
       <Container>
@@ -40,16 +38,22 @@ const Services: NextPage = ({ services }: Props) => {
 
         {services.map((service) => (
           <Section key={service.id} id={service.id}>
-            <h2>{service.name}</h2>
+            <Typography variant="h2">{service.name}</Typography>
             <Typography variant="body1">{service.description}</Typography>
             <Box
-              sx={{
-                width: '1000px',
-                height: '400px',
-                background: theme.palette.grey.A200,
-              }}
+              component={'img'}
+              display={'block'}
+              src={`services/${service.image}`}
+              height={1}
+              width={1}
             />
-            <Typography variant="caption">{service.caption}</Typography>
+            <Typography
+              variant="caption"
+              display={'block'}
+              sx={{ mt: '2px', p: 0 }}
+            >
+              {service.caption}
+            </Typography>
           </Section>
         ))}
       </Container>
