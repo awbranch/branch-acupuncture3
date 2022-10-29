@@ -3,11 +3,11 @@ import Main from 'layouts/main/Main';
 import Container from 'components/Container';
 import Section from 'components/Section';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import path from 'path';
 import { promises as fs } from 'fs';
+import ScheduleSession from '../components/ScheduleSession';
 
 interface Props {
   questions: Array<Question>;
@@ -28,10 +28,7 @@ const Appointments: NextPage = ({ questions }: Props) => {
           convallis mollis neque. Nullam ac metus velit. Ut ut vehicula erat.{' '}
         </Typography>
 
-        <Section id="schedule-session">
-          <Typography variant="h2">Schedule a Session</Typography>
-          <Box>Session</Box>
-        </Section>
+        <ScheduleSession />
 
         <Section id="questions">
           <Typography variant="h2">Questions</Typography>

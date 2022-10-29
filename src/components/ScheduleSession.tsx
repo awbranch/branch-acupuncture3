@@ -2,22 +2,22 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Section from 'components/Section';
-import NextLink from 'next/link';
 
 const ScheduleSession = (): JSX.Element => (
   <Section>
     <Box component="div" sx={{ textAlign: 'center' }}>
-      <NextLink href={'/appointments#schedule-session'} passHref>
-        <Button
-          component={'a'}
-          variant="contained"
-          color="primary"
-          size="large"
-          sx={{ textTransform: 'uppercase' }}
-        >
-          Schedule a Session
-        </Button>
-      </NextLink>
+      <Button
+        component={'a'}
+        variant="contained"
+        color="primary"
+        size="large"
+        href="https://mollybranch.janeapp.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        sx={{ textTransform: 'uppercase' }}
+      >
+        Schedule a Session
+      </Button>
     </Box>
   </Section>
 );

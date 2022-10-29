@@ -23,7 +23,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 The following technologies were used to create this project:
 
 - [Node.js](https://nodejs.org)
-- [TypeScrupt](https://www.typescriptlang.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 - [React.js](https://reactjs.org/)
 - [Next.js](https://nextjs.org/)
 - [Material UI](https://mui.com/)
