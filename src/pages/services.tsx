@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import path from 'path';
 import { promises as fs } from 'fs';
+import Hero from '../components/Hero';
+import Button from '@mui/material/Button';
 
 interface Props {
   services: Array<Service>;
@@ -14,6 +16,28 @@ interface Props {
 const Services: NextPage = ({ services }: Props) => {
   return (
     <Main>
+      <Hero image="/hero/services.jpg">
+        <Typography variant="h1" sx={{ color: 'common.white' }}>
+          Branch Acupuncture Center
+        </Typography>
+        <Typography
+          component="p"
+          variant="subtitle1"
+          paragraph
+          sx={{ mt: 2, color: 'common.white' }}
+        >
+          Wisdom of East Asian Medicine for Every Unique Individual
+        </Typography>
+        <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
+          Whatever your health goals may be, East Asian Medicine can help you
+          achieve them. At Branch Acupuncture Center, we offer the wisdom of
+          East Asian Medicine to help restore balance to your whole being. Molly
+          Branch, owner, and licensed acupuncturist, provides natural healing
+          modalities in a calm space to support mental and emotional health and
+          well-being, pain management, preventative medicine, and oncology
+          support.
+        </Typography>
+      </Hero>
       <Container>
         <Section>
           <Typography variant="h1">Services</Typography>

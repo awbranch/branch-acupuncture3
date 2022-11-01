@@ -7,6 +7,7 @@ import { promises as fs } from 'fs';
 import Section from '../components/Section';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
+import Hero from '../components/Hero';
 
 interface Props {
   elements: Array<Element>;
@@ -17,18 +18,30 @@ const Theory: NextPage = ({ elements }: Props) => {
 
   return (
     <Main>
+      <Hero image="/hero/theory.jpg">
+        <Typography variant="h1" sx={{ color: 'common.white' }}>
+          Five Element Theory
+        </Typography>
+        <Typography
+          component="p"
+          variant="subtitle1"
+          paragraph
+          sx={{ mt: 2, color: 'common.white' }}
+        >
+          Wisdom of East Asian Medicine for Every Unique Individual
+        </Typography>
+        <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
+          East Asian Medicine views the body as a small universe with five major
+          interconnected systems. Each system is represented by an element:
+          Wood, Fire, Earth, Metal, and Water. Five elements theory is a
+          framework used in East Asian Medicine to explain how the world world
+          and weather around us influence us and how body organs Each element is
+          associated with specific body organs, color, taste, emotion, and year
+          season, among other things.{' '}
+        </Typography>
+      </Hero>
       <Container>
         <Section>
-          <Typography variant="h1">Five Element Theory</Typography>
-          <Typography variant="body1" paragraph>
-            East Asian Medicine views the body as a small universe with five
-            major interconnected systems. Each system is represented by an
-            element: Wood, Fire, Earth, Metal, and Water. Five elements theory
-            is a framework used in East Asian Medicine to explain how the world
-            and weather around us influence us and how body organs interact.
-            Each element is associated with specific body organs, color, taste,
-            emotion, and year season, among other things.{' '}
-          </Typography>
           <Typography variant="body1" paragraph>
             From an East Asian Medicine perspective, understanding which of the
             five elements has a dominant effect on you can give you insight into
