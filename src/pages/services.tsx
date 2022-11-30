@@ -5,28 +5,36 @@ import Container from 'components/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import path from 'path';
-import { promises as fs } from 'fs';
-import Hero from '../components/Hero';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import { promises as fs } from 'fs';
+import Hero from 'components/Hero';
 
 interface Props {
   services: Array<Service>;
 }
 
 const Services: NextPage = ({ services }: Props) => {
+  /* const scrollTo = (id: string): void => {
+    setTimeout(() => {
+      const element: HTMLElement = document.querySelector(`#${id}`);
+      if (!element) {
+        return;
+      }
+
+      window.scrollTo({
+        left: 0,
+        top: element.offsetTop - 80,
+        behavior: 'smooth',
+      });
+    });
+  };
+  */
   return (
-    <Main>
+    <Main colorInvert={true}>
       <Hero image="/hero/services.jpg">
         <Typography variant="h1" sx={{ color: 'common.white' }}>
-          Branch Acupuncture Center
-        </Typography>
-        <Typography
-          component="p"
-          variant="subtitle1"
-          paragraph
-          sx={{ mt: 2, color: 'common.white' }}
-        >
-          Wisdom of East Asian Medicine for Every Unique Individual
+          East Asian Medicine
         </Typography>
         <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
           Whatever your health goals may be, East Asian Medicine can help you

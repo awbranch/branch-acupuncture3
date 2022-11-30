@@ -8,7 +8,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import path from 'path';
 import { promises as fs } from 'fs';
-import Hero from '../components/Hero';
+import Hero from 'components/Hero';
 
 interface Props {
   questions: Array<Question>;
@@ -16,18 +16,10 @@ interface Props {
 
 const Appointments: NextPage = ({ questions }: Props) => {
   return (
-    <Main>
+    <Main colorInvert={true}>
       <Hero image="/hero/appointments.jpg">
         <Typography variant="h1" sx={{ color: 'common.white' }}>
           Appointments
-        </Typography>
-        <Typography
-          component="p"
-          variant="subtitle1"
-          paragraph
-          sx={{ mt: 2, color: 'common.white' }}
-        >
-          Wisdom of East Asian Medicine for Every Unique Individual
         </Typography>
         <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
           Pellentesque urna nulla, tincidunt quis tempus sed, lacinia vel urna.

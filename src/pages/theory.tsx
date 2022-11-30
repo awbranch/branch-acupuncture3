@@ -7,7 +7,7 @@ import { promises as fs } from 'fs';
 import Section from '../components/Section';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
-import Hero from '../components/Hero';
+import Hero from 'components/Hero';
 
 interface Props {
   elements: Array<Element>;
@@ -17,18 +17,10 @@ const Theory: NextPage = ({ elements }: Props) => {
   const theme = useTheme();
 
   return (
-    <Main>
+    <Main colorInvert={true}>
       <Hero image="/hero/theory.jpg">
         <Typography variant="h1" sx={{ color: 'common.white' }}>
           Five Element Theory
-        </Typography>
-        <Typography
-          component="p"
-          variant="subtitle1"
-          paragraph
-          sx={{ mt: 2, color: 'common.white' }}
-        >
-          Wisdom of East Asian Medicine for Every Unique Individual
         </Typography>
         <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
           East Asian Medicine views the body as a small universe with five major
@@ -39,20 +31,17 @@ const Theory: NextPage = ({ elements }: Props) => {
           associated with specific body organs, color, taste, emotion, and year
           season, among other things.{' '}
         </Typography>
+        <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
+          From an East Asian Medicine perspective, understanding which of the
+          five elements has a dominant effect on you can give you insight into
+          your strengths and weaknesses. When our body is in balance, these
+          systems flow smoothly. When one or more systems fall out of balance,
+          symptoms emerge, resulting in illness. Acupuncture and East Asian
+          modalities can restore the proper flow between systems, relieving
+          ailments and imbalances.{' '}
+        </Typography>
       </Hero>
       <Container>
-        <Section>
-          <Typography variant="body1" paragraph>
-            From an East Asian Medicine perspective, understanding which of the
-            five elements has a dominant effect on you can give you insight into
-            your strengths and weaknesses. When our body is in balance, these
-            systems flow smoothly. When one or more systems fall out of balance,
-            symptoms emerge, resulting in illness. Acupuncture and East Asian
-            modalities can restore the proper flow between systems, relieving
-            ailments and imbalances.{' '}
-          </Typography>
-        </Section>
-
         {elements.map((element) => (
           <Section key={element.id} id={element.id}>
             <Typography variant="h2">{element.name}</Typography>
