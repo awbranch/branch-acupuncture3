@@ -32,7 +32,6 @@ const Home: NextPage = ({ services }: Props) => {
       });
     });
   };
-
   return (
     <Main colorInvert={true}>
       <Hero image="/hero/home.jpg">

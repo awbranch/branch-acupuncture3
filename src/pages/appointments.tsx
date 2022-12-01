@@ -7,6 +7,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import path from 'path';
 import { promises as fs } from 'fs';
+import Hero from 'components/Hero';
 import ScheduleSession from '../components/ScheduleSession';
 
 interface Props {
@@ -15,10 +16,12 @@ interface Props {
 
 const Appointments: NextPage = ({ questions }: Props) => {
   return (
-    <Main>
-      <Container>
-        <Typography variant="h1">Appointments</Typography>
-        <Typography variant="body1">
+    <Main colorInvert={true}>
+      <Hero image="/hero/appointments.jpg">
+        <Typography variant="h1" sx={{ color: 'common.white' }}>
+          Appointments
+        </Typography>
+        <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
           Pellentesque urna nulla, tincidunt quis tempus sed, lacinia vel urna.
           Duis orci justo, ultricies et gravida ac, porttitor et nulla.
           Suspendisse eget dignissim massa, at rutrum ex. Integer ut ante at
@@ -27,6 +30,9 @@ const Appointments: NextPage = ({ questions }: Props) => {
           eros. Phasellus orci metus, porttitor sit amet maximus laoreet,
           convallis mollis neque. Nullam ac metus velit. Ut ut vehicula erat.{' '}
         </Typography>
+      </Hero>
+      <Container>
+        <Typography variant="h1">Appointments</Typography>
 
         <ScheduleSession />
 

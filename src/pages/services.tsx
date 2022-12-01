@@ -5,15 +5,47 @@ import Container from 'components/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import path from 'path';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 import { promises as fs } from 'fs';
+import Hero from 'components/Hero';
 
 interface Props {
   services: Array<Service>;
 }
 
 const Services: NextPage = ({ services }: Props) => {
+  /* const scrollTo = (id: string): void => {
+    setTimeout(() => {
+      const element: HTMLElement = document.querySelector(`#${id}`);
+      if (!element) {
+        return;
+      }
+
+      window.scrollTo({
+        left: 0,
+        top: element.offsetTop - 80,
+        behavior: 'smooth',
+      });
+    });
+  };
+  */
   return (
-    <Main>
+    <Main colorInvert={true}>
+      <Hero image="/hero/services.jpg">
+        <Typography variant="h1" sx={{ color: 'common.white' }}>
+          East Asian Medicine
+        </Typography>
+        <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
+          Whatever your health goals may be, East Asian Medicine can help you
+          achieve them. At Branch Acupuncture Center, we offer the wisdom of
+          East Asian Medicine to help restore balance to your whole being. Molly
+          Branch, owner, and licensed acupuncturist, provides natural healing
+          modalities in a calm space to support mental and emotional health and
+          well-being, pain management, preventative medicine, and oncology
+          support.
+        </Typography>
+      </Hero>
       <Container>
         <Section>
           <Typography variant="h1">Services</Typography>
