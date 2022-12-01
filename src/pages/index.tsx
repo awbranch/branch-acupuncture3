@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Main from 'layouts/main/Main';
 import Container from 'components/Container';
 import Section from 'components/Section';
-import ScheduleSession from 'components/ScheduleSession';
+import ScheduleAppointment from 'components/ScheduleAppointment';
 import ServiceCard from 'components/ServiceCard';
 import Hero from 'components/Hero';
 import Reviews from 'components/Reviews';
@@ -12,26 +12,13 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import path from 'path';
 import { promises as fs } from 'fs';
+import { smoothScrollTo } from 'utils/utils';
 
 interface Props {
   services: Array<Service>;
 }
 
 const Home: NextPage = ({ services }: Props) => {
-  const scrollTo = (id: string): void => {
-    setTimeout(() => {
-      const element: HTMLElement = document.querySelector(`#${id}`);
-      if (!element) {
-        return;
-      }
-
-      window.scrollTo({
-        left: 0,
-        top: element.offsetTop - 80,
-        behavior: 'smooth',
-      });
-    });
-  };
   return (
     <Main colorInvert={true}>
       <Hero image="/hero/home.jpg">
@@ -62,7 +49,7 @@ const Home: NextPage = ({ services }: Props) => {
             color="secondary"
             size="large"
             sx={{ textTransform: 'uppercase' }}
-            onClick={() => scrollTo('welcome')}
+            onClick={() => smoothScrollTo('welcome', 80)}
           >
             More
           </Button>
@@ -83,7 +70,7 @@ const Home: NextPage = ({ services }: Props) => {
             safely, with fewer symptoms and better future conditions.
           </Typography>
         </Section>
-        <ScheduleSession />
+        <ScheduleAppointment />
 
         <Section>
           <Grid

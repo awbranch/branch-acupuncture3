@@ -10,7 +10,7 @@ import ListItem from '@mui/material/ListItem';
 import ContactUs from 'components/ContactUs';
 import path from 'path';
 import { promises as fs } from 'fs';
-import ScheduleSession from '../components/ScheduleSession';
+import ScheduleAppointment from '../components/ScheduleAppointment';
 
 interface Props {
   certifications: Array<Certification>;
@@ -63,7 +63,7 @@ const About: NextPage = ({ certifications, education }: Props) => {
           <Box sx={{ width: '200px', height: '200px' }} />
         </Section>
 
-        <ScheduleSession />
+        <ScheduleAppointment />
 
         <Section id="contact">
           <ContactUs />

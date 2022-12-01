@@ -2,13 +2,15 @@ import type { NextPage } from 'next';
 import Main from 'layouts/main/Main';
 import Container from 'components/Container';
 import Section from 'components/Section';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import path from 'path';
 import { promises as fs } from 'fs';
 import Hero from 'components/Hero';
-import ScheduleSession from '../components/ScheduleSession';
+import { smoothScrollTo } from '../utils/utils';
 
 interface Props {
   questions: Array<Question>;
@@ -22,20 +24,54 @@ const Appointments: NextPage = ({ questions }: Props) => {
           Appointments
         </Typography>
         <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
-          Pellentesque urna nulla, tincidunt quis tempus sed, lacinia vel urna.
-          Duis orci justo, ultricies et gravida ac, porttitor et nulla.
-          Suspendisse eget dignissim massa, at rutrum ex. Integer ut ante at
-          libero dictum dapibus condimentum ac sapien. Morbi non lacus quis
-          justo feugiat scelerisque. Aliquam at blandit sapien, quis ultricies
-          eros. Phasellus orci metus, porttitor sit amet maximus laoreet,
-          convallis mollis neque. Nullam ac metus velit. Ut ut vehicula erat.{' '}
+          Branch Acupuncture Center now uses an online booking system for
+          scheduling appointments. If you are a new patient or have not signed
+          up for our new booking system, please select “New Client SIgnup”
+          below. Existing clients can select “Book Now”
         </Typography>
+
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={{ xs: 2, sm: 10 }}
+          justifyContent="center"
+          sx={{ mt: 20, mb: 10, mx: 'auto' }}
+        >
+          <Button
+            component={'a'}
+            variant="contained"
+            color="secondary"
+            size="large"
+            sx={{ textTransform: 'uppercase', minWidth: '300px' }}
+            onClick={() => smoothScrollTo('new-client-signup', 80)}
+          >
+            New Client Signup
+          </Button>
+
+          <Button
+            component={'a'}
+            variant="contained"
+            color="secondary"
+            size="large"
+            href="https://mollybranch.janeapp.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{ textTransform: 'uppercase', minWidth: '300px' }}
+          >
+            Book Now
+          </Button>
+        </Stack>
       </Hero>
+
       <Container>
-        <Typography variant="h1">Appointments</Typography>
-
-        <ScheduleSession />
-
+        <Section id="new-client-signup">
+          <Typography variant="h2">New Client Signup</Typography>
+          <Typography variant="body1" paragraph>
+            If you are a new client of Branch Acupuncture center, or are unable
+            to use our online booking system, please fill in the following form
+            with your name, phone number, email address, and a brief message of
+            the service you are seeking.
+          </Typography>
+        </Section>
         <Section id="questions">
           <Typography variant="h2">Questions</Typography>
           <List
@@ -49,7 +85,7 @@ const Appointments: NextPage = ({ questions }: Props) => {
                 sx={{ display: 'block', px: 0, py: 3 }}
               >
                 <Typography variant="h3">{question.question}</Typography>
-                <Typography variant="body1">
+                <Typography variant="body1" component="div">
                   <div dangerouslySetInnerHTML={{ __html: question.answer }} />
                 </Typography>
               </ListItem>
