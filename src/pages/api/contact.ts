@@ -3,7 +3,7 @@ import React from 'react';
 import * as ReactDOMServer from 'react-dom/server';
 import ContactFormSubmittedEmail from 'components/email/ContactFormSubmittedEmail';
 import ContactFormConfirmationEmail from 'components/email/ContactFormConfirmationEmail';
-import contactInfoSchema from 'utils/contactInfoSchema';
+import { messageSchema, signupSchema } from 'utils/contactInfoSchema';
 import path from 'path';
 
 const transporter = nodemailer.createTransport({
@@ -18,11 +18,18 @@ const transporter = nodemailer.createTransport({
 const handler = async (req, res) => {
   if (req.method === 'POST') {
     try {
+      let type = req.body.type;
+      if (type !== 'message' && type !== 'signup') {
+        res.status(500).send({ message: `Invalid Message Type ${type}` });
+        return;
+      }
+
       // Revalidate what was submitted
-      let info = await contactInfoSchema.validate(req.body, {
+      let schema = type === 'message' ? messageSchema : signupSchema;
+      let info = (await schema.validate(req.body, {
         abortEarly: true,
         stripUnknown: true,
-      });
+      })) as ContactInfo;
 
       // Check the honeypot it must be blank
       if (info.accounting.length !== 0) {
@@ -34,11 +41,15 @@ const handler = async (req, res) => {
       let logoId = 'email-header@mollybranch.com';
       let logoPath = path.resolve('./public');
 
-      // Send an email to Molly
+      // Email Molly
       let status = await transporter.sendMail({
         from: process.env.EMAIL_FROM,
         to: process.env.EMAIL_TO,
-        subject: 'Branch Acupuncture Message',
+        subject: `Branch Acupuncture ${
+          type === 'message'
+            ? 'Question From: '
+            : 'New Client Request: ' + info.name
+        }`,
         html: ReactDOMServer.renderToString(
           React.createElement(ContactFormSubmittedEmail, {
             info,

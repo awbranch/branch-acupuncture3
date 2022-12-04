@@ -1,5 +1,14 @@
 import React from 'react';
-import { Page, Logo, Title, Text } from './elements';
+import {
+  Page,
+  Logo,
+  Title,
+  Table,
+  Row,
+  DoubleCell,
+  Header,
+  Text,
+} from './elements';
 
 interface Props {
   info: ContactInfo;
@@ -15,11 +24,41 @@ const ContactFormSubmittedEmail = ({
   return (
     <Page>
       <Logo path={logoPath} />
-      <Title>Contact Us Form Submittal</Title>
-      <Text>{submitted}</Text>
-      <Text paragraph={true}>{info.message}</Text>
-      <Text paragraph={true}>{info.name}</Text>
-      <Text>{info.email}</Text>
+      {info.type === 'message' ? (
+        <Title>Customer Message</Title>
+      ) : (
+        <Title>New Client Request</Title>
+      )}
+      <Text>Submitted: {submitted}</Text>
+
+      <Table>
+        <Row>
+          <DoubleCell>
+            <Header>Name</Header>
+            <Text>{info.name}</Text>
+          </DoubleCell>
+        </Row>
+        {info.type === 'signup' && (
+          <Row>
+            <DoubleCell>
+              <Header>Phone</Header>
+              <Text>{info.phone}</Text>
+            </DoubleCell>
+          </Row>
+        )}
+        <Row>
+          <DoubleCell>
+            <Header>Email</Header>
+            <Text>{info.email}</Text>
+          </DoubleCell>
+        </Row>
+        <Row>
+          <DoubleCell>
+            <Header>Message</Header>
+            <Text>{info.message}</Text>
+          </DoubleCell>
+        </Row>
+      </Table>
     </Page>
   );
 };

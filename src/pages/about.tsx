@@ -6,8 +6,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-
-import ContactUs from 'components/ContactUs';
+import Link from '@mui/material/Link';
+import NextLink from 'next/link';
+import ContactForm from 'components/contactForm/ContactForm';
 import path from 'path';
 import { promises as fs } from 'fs';
 import ScheduleAppointment from '../components/ScheduleAppointment';
@@ -66,7 +67,17 @@ const About: NextPage = ({ certifications, education }: Props) => {
         <ScheduleAppointment />
 
         <Section id="contact">
-          <ContactUs />
+          <Typography variant="h2">Contact Us</Typography>
+          <Typography variant="body1" sx={{ mb: 5 }}>
+            Please use this form to ask any questions of Branch Acupuncture
+            Center. If you are interested in becoming a new client, please use
+            our{' '}
+            <NextLink href="/appointments#new-client-signup" passHref>
+              <Link>new client signup</Link>
+            </NextLink>{' '}
+            form instead.
+          </Typography>
+          <ContactForm type="message" scrollToId="contact" />
         </Section>
       </Container>
     </Main>

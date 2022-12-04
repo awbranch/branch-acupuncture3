@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page, Logo, Text } from './elements';
+import { Page, Logo, Title, Text, Para } from './elements';
 
 interface Props {
   info: ContactInfo;
@@ -15,13 +15,30 @@ const ContactFormConfirmationEmail = ({
   return (
     <Page>
       <Logo path={logoPath} />
-      <Text paragraph={true}>{info.name},</Text>
-      <Text paragraph={true}>
-        Thank you for contacting the Branch Acupuncture Center. Your question
-        will be reviewed and replied to via email as soon as possible. We
-        appreciate your business.
-      </Text>
-      <Text paragraph={true}>Branch Acupuncture Center</Text>
+      {info.type === 'message' ? (
+        <Title>Contact Us - Message Received</Title>
+      ) : (
+        <Title>New Client Signup - Request Received</Title>
+      )}
+      <Text>{submitted}</Text>
+
+      <Para>Dear {info.name},</Para>
+      {info.type === 'message' ? (
+        <Para>
+          Thank you for contacting the Branch Acupuncture Center. Your question
+          will be reviewed and replied to via email as soon as possible. We
+          appreciate your business.
+        </Para>
+      ) : (
+        <Para>
+          Thank you for requesting to become a Branch Acupuncture Center client.
+          Your request will be reviewed and replied to via email as soon as
+          possible. We appreciate your business.
+        </Para>
+      )}
+      <Para>Sincerely,</Para>
+      <Text>Molly Branch Shill</Text>
+      <Text>Branch Acupuncture Center</Text>
     </Page>
   );
 };

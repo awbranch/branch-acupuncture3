@@ -5,7 +5,7 @@ import Section from 'components/Section';
 import NextLink from 'next/link';
 
 const ScheduleAppointment = (): JSX.Element => (
-  <Section>
+  <Section id="schedule-appointment">
     <Box component="div" sx={{ textAlign: 'center' }}>
       <NextLink href="/appointments" passHref>
         <Button

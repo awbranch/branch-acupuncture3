@@ -21,6 +21,7 @@
     "react-dom": "18.2.0",
     "react-lazy-load-image-component": "^1.5.5",
     "react-slick": "^0.29.0",
+    "react-spinners": "^0.13.7",
     "slick-carousel": "^1.8.1",
     "yup": "^0.32.11"
   },
