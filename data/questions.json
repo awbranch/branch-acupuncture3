@@ -22,7 +22,7 @@
   {
     "id": "insurance",
     "question": "Do you take insurance?",
-    "answer": "Suspendisse eget dignissim massa, at rutrum ex. Integer ut ante at libero dictum dapibus condimentum ac sapien. Morbi non lacus quis justo feugiat scelerisque. Aliquam at blandit sapien, quis ultricies eros. Phasellus orci metus, porttitor sit amet maximus laoreet, convallis mollis neque. Nullam ac metus velit."
+    "answer": "No. Branch Acupuncture is not currently taking insurance."
   },
   {
     "id": "rates",
@@ -32,7 +32,7 @@
   {
     "id": "science",
     "question": "What does the science say?",
-    "answer": "Strong evidence exists that acupuncture is effective for a variety of conditions. Below are some evidence-based research articles as well as studies from some of the biggest names in medicine supporting acupuncture. <br/>     <ul>\n    <li><a>Exploring the Science of Acupuncture Harvard Medical School</a></li>\n    <li><a>Oncology Acupuncture</a></li>\n    <li><a>Acupuncture for the Oncology Patient</a></li>\n    <li><a>Acupuncture for Inflammation</a></li>\n    <li><a>Acupuncture for Chronic Pain</a></li>\n    <li><a>Acupuncture and Immunity</a></li>\n    <li><a>Acupuncture for Depression</a></li>\n    </ul>\n"
+    "answer": "Strong evidence exists that acupuncture is effective for a variety of conditions. Below are some evidence-based research articles as well as studies from some of the biggest names in medicine supporting acupuncture.\n\n   - <a href=\"https://hms.harvard.edu/news/exploring-science-acupuncture\" target=\"_blank\" rel=\"noopener noreferrer\">Exploring the Science of Acupuncture Harvard Medical School</a>\n   - <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6041915/#:~:text=Acupuncture%20has%20become%20a%20popular,cancer%20treatment%20in%20recent%20years.&text=Emerging%20evidence%20from%20clinical%20trials,during%20and%20post%E2%80%93cancer%20treatment\" target=\"_blank\" rel=\"noopener noreferrer\">Oncology Acupuncture</a>\n   - <a href=\"https://www.mskcc.org/cancer-care/patient-education/acupuncture\" target=\"_blank\" rel=\"noopener noreferrer\">Acupuncture for the Oncology Patient</a>\n   - <a href=\"https://news.harvard.edu/gazette/story/2020/08/study-reveals-acupuncture-affects-disease-course/\" target=\"_blank\" rel=\"noopener noreferrer\">Acupuncture for Inflammation</a>\n   - <a href=\"https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/1357513\" target=\"_blank\" rel=\"noopener noreferrer\">Acupuncture for Chronic Pain</a>\n   - <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4540978/\" target=\"_blank\" rel=\"noopener noreferrer\">Acupuncture and Immunity</a>\n   - <a href=\"https://www.scientificamerican.com/article/can-acupuncture-treat-depression/\" target=\"_blank\" rel=\"noopener noreferrer\">Acupuncture for Depression</a>"
   },
   {
     "id": "location",

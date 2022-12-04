@@ -13,6 +13,7 @@ import Hero from 'components/Hero';
 import { smoothScrollTo } from '../utils/utils';
 import ContactForm from '../components/contactForm/ContactForm';
 import Link from '@mui/material/Link';
+import Markdown from 'markdown-to-jsx';
 
 interface Props {
   questions: Array<Question>;
@@ -84,20 +85,30 @@ const Appointments: NextPage = ({ questions }: Props) => {
         </Section>
         <Section id="questions">
           <Typography variant="h2">Questions</Typography>
-          <List
-            sx={{
-              listStyleType: 'none',
-            }}
-          >
+          <List>
             {questions.map((question) => (
               <ListItem
                 key={question.id}
                 sx={{ display: 'block', px: 0, py: 3 }}
               >
-                <Typography variant="h3">{question.question}</Typography>
-                <Typography variant="body1" component="div">
-                  <div dangerouslySetInnerHTML={{ __html: question.answer }} />
+                <Typography variant="h3" sx={{ mb: 2 }}>
+                  {question.question}
                 </Typography>
+                <Markdown
+                  options={{
+                    overrides: {
+                      p: {
+                        component: Typography,
+                        props: { variant: 'body1' },
+                      },
+                      a: {
+                        component: Link,
+                      },
+                    },
+                  }}
+                >
+                  {question.answer}
+                </Markdown>
               </ListItem>
             ))}
           </List>

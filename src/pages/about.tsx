@@ -38,9 +38,9 @@ const About: NextPage = ({ certifications, education }: Props) => {
 
         <Section id="certifications">
           <Typography variant="h2">Certifications</Typography>
-          <List>
+          <List sx={{ listStyleType: 'disc', pl: 4 }}>
             {certifications.map((c, i) => (
-              <ListItem key={i} sx={{ display: 'block', p: 0, m: 0 }}>
+              <ListItem key={i} sx={{ display: 'list-item', p: 0, m: 0 }}>
                 <Typography variant="body1">{c.description}</Typography>
               </ListItem>
             ))}
@@ -49,9 +49,9 @@ const About: NextPage = ({ certifications, education }: Props) => {
 
         <Section id="education">
           <Typography variant="h2">Education</Typography>
-          <List>
+          <List sx={{ listStyleType: 'disc', pl: 4 }}>
             {education.map((e, i) => (
-              <ListItem key={i} sx={{ display: 'block', p: 0, m: 0 }}>
+              <ListItem key={i} sx={{ display: 'list-item', p: 0, m: 0 }}>
                 <Typography variant="body1">{e.description}</Typography>
               </ListItem>
             ))}
