@@ -44,16 +44,24 @@ const Theory: NextPage = ({ elements }: Props) => {
       <Container>
         {elements.map((element) => (
           <Section key={element.id} id={element.id}>
-            <Typography variant="h2">{element.name}</Typography>
-            <Typography variant="body1">{element.description}</Typography>
-            <Box
-              sx={{
-                width: '1000px',
-                height: '400px',
-                background: theme.palette.grey.A200,
-              }}
-            />
-            <Typography variant="caption">{element.caption}</Typography>
+            <Box sx={{ textAlign: 'center' }}>
+              <Typography variant="h2">{element.name}</Typography>
+              <Typography variant="body1">{element.description}</Typography>
+              <Box
+                sx={{
+                  display: 'block',
+                  mx: 'auto',
+                  background: theme.palette.grey.A200,
+                }}
+                width={250}
+                height={250}
+              />
+              <Box sx={{ maxWidth: '250px', mx: 'auto', mb: 4 }}>
+                <Typography component="div" variant="caption">
+                  {element.caption}
+                </Typography>
+              </Box>
+            </Box>
           </Section>
         ))}
       </Container>
