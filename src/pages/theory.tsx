@@ -6,7 +6,6 @@ import path from 'path';
 import { promises as fs } from 'fs';
 import Section from '../components/Section';
 import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
 import Hero from 'components/Hero';
 import Button from '@mui/material/Button';
 import { smoothScrollTo } from '../utils/utils';
@@ -16,8 +15,6 @@ interface Props {
 }
 
 const Theory: NextPage = ({ elements }: Props) => {
-  const theme = useTheme();
-
   return (
     <Main colorInvert={true}>
       <Hero image="/hero/theory.jpg">
@@ -62,11 +59,10 @@ const Theory: NextPage = ({ elements }: Props) => {
               <Typography variant="h2">{element.name}</Typography>
               <Typography variant="body1">{element.description}</Typography>
               <Box
-                sx={{
-                  display: 'block',
-                  mx: 'auto',
-                  background: theme.palette.grey.A200,
-                }}
+                sx={{ mx: 'auto', mt: 2 }}
+                component={'img'}
+                display={'block'}
+                src={`elements/${element.image}`}
                 width={250}
                 height={250}
               />
