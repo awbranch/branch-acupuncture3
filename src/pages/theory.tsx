@@ -8,6 +8,8 @@ import Section from '../components/Section';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import Hero from 'components/Hero';
+import Button from '@mui/material/Button';
+import { smoothScrollTo } from '../utils/utils';
 
 interface Props {
   elements: Array<Element>;
@@ -40,8 +42,20 @@ const Theory: NextPage = ({ elements }: Props) => {
           modalities can restore the proper flow between systems, relieving
           ailments and imbalances.{' '}
         </Typography>
+        <Box component="div" sx={{ m: 5, textAlign: 'center' }}>
+          <Button
+            component={'a'}
+            variant="contained"
+            color="secondary"
+            size="large"
+            sx={{ textTransform: 'uppercase' }}
+            onClick={() => smoothScrollTo('elements', 0)}
+          >
+            More
+          </Button>
+        </Box>
       </Hero>
-      <Container>
+      <Container id="elements">
         {elements.map((element) => (
           <Section key={element.id} id={element.id}>
             <Box sx={{ textAlign: 'center' }}>

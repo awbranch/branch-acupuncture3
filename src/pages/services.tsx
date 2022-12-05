@@ -8,6 +8,8 @@ import Box from '@mui/material/Box';
 import path from 'path';
 import { promises as fs } from 'fs';
 import Hero from 'components/Hero';
+import Button from '@mui/material/Button';
+import { smoothScrollTo } from '../utils/utils';
 
 interface Props {
   services: Array<Service>;
@@ -37,8 +39,21 @@ const Services: NextPage = ({ services }: Props) => {
           safe, and minimally invasive, it benefits people of all ages and all
           health situations.
         </Typography>
+
+        <Box component="div" sx={{ m: 5, textAlign: 'center' }}>
+          <Button
+            component={'a'}
+            variant="contained"
+            color="secondary"
+            size="large"
+            sx={{ textTransform: 'uppercase' }}
+            onClick={() => smoothScrollTo('services', 0)}
+          >
+            More
+          </Button>
+        </Box>
       </Hero>
-      <Container>
+      <Container id="services">
         {services.map((service) => (
           <Section key={service.id} id={service.id}>
             <Typography variant="h2">{service.name}</Typography>
