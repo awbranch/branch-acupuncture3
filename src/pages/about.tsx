@@ -12,6 +12,9 @@ import ContactForm from 'components/contactForm/ContactForm';
 import path from 'path';
 import { promises as fs } from 'fs';
 import ScheduleAppointment from '../components/ScheduleAppointment';
+import Stack from '@mui/material/Stack';
+import React from 'react';
+import { smoothScrollTo } from '../utils/utils';
 
 interface Props {
   certifications: Array<Certification>;
@@ -60,11 +63,83 @@ const About: NextPage = ({ certifications, education }: Props) => {
 
         <Section id="office">
           <Typography variant="h2">Our Office</Typography>
-          <Typography variant="body1">Office Address</Typography>
-          <Box sx={{ width: '200px', height: '200px' }} />
+          <Typography variant="body1">Branch Acupuncture Center</Typography>
+          <Box>
+            <Stack direction="row" spacing={1} alignItems="flex-start">
+              <Box
+                component="img"
+                src="/icons/globe-light.svg"
+                width={20}
+                sx={{ mt: '8px' }}
+              />
+              <Typography variant="body1">
+                633 Kreag Road Pittsford, NY 14534
+              </Typography>
+            </Stack>
+
+            <Stack direction="row" spacing={1} alignItems="flex-start">
+              <Box
+                component="img"
+                src="/icons/phone-light.svg"
+                width={20}
+                sx={{ mt: '8px' }}
+              />
+              <Typography variant="body1">(585) 256-3980</Typography>
+            </Stack>
+            <Link
+              sx={{ cursor: 'pointer' }}
+              underline="hover"
+              onClick={() => smoothScrollTo('contact', 0)}
+            >
+              <Stack direction="row" spacing={1} alignItems="flex-start">
+                <Box
+                  component="img"
+                  src="/icons/envelope-light.svg"
+                  width={20}
+                  sx={{ mt: '8px' }}
+                />
+                <Typography variant="body1">Contact Us</Typography>
+              </Stack>
+            </Link>
+          </Box>
         </Section>
 
         <ScheduleAppointment />
+
+        <Section id="history">
+          <Typography variant="h2">History</Typography>
+          <Typography variant="body1">
+            Branch Acupuncture Center has been in existence in the Rochester
+            area since 2001. Our original office was at 35 North Goodman Street
+            in Rochester. Eventually, we found our way to an old chapel at 2
+            Thornell Road in Bushnell’s Basin. This year, we opened our newest
+            and last clinic at 633 Kreag Road, also in Bushnell’s Basin. This
+            building was previously owned by Deeanne Bevin, an acupuncturist in
+            the area, for the past 30 years. Molly is excited to work in this
+            new to her space which Deeanne and so many of her clients have loved
+            over the years.
+          </Typography>
+          <Box
+            component={'img'}
+            display={'block'}
+            src={'office.jpg'}
+            sx={{ mt: 5 }}
+            height={1}
+            width={1}
+          />
+          <Stack
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            justifyContent="center"
+            sx={{ mt: 2 }}
+          >
+            <Box component="img" src="/icons/globe-light.svg" width={14} />
+            <Typography variant="caption">
+              633 Kreag Road Pittsford, NY 14534
+            </Typography>
+          </Stack>
+        </Section>
 
         <Section id="contact">
           <Typography variant="h2">Contact Us</Typography>
