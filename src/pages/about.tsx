@@ -26,18 +26,26 @@ const About: NextPage = ({ certifications, education }: Props) => {
     <Main>
       <Container>
         <Typography variant="h1">Molly Branch</Typography>
-        <Typography variant="body1">
-          Molly Branch Shill is a licensed acupuncturist in New York State and
-          board-certified by the National Certification Commission for
-          Acupuncture and Oriental Medicine. Molly holds a Master of
-          Professional Studies degree in Community Services Administration from
-          Alfred University. She also has a master&apos;s degree in acupuncture
-          from the New England School of Acupuncture (NESA), where she studied
-          Japanese and Chinese styles of acupuncture along with Chinese
-          herbology. In December 2022, she will graduate with her clinical
-          doctorate in acupuncture from the Pacific College of Health Sciences
-          in San Diego.
-        </Typography>
+
+        <Stack
+          direction={{ xs: 'column', md: 'row' }}
+          spacing={4}
+          alignItems="flex-start"
+        >
+          <Box component="img" src="/headshot.jpg" width={{ xs: 1, md: 390 }} />
+          <Typography variant="body1">
+            Molly Branch Shill is a licensed acupuncturist in New York State and
+            board-certified by the National Certification Commission for
+            Acupuncture and Oriental Medicine. Molly holds a Master of
+            Professional Studies degree in Community Services Administration
+            from Alfred University. She also has a master&apos;s degree in
+            acupuncture from the New England School of Acupuncture (NESA), where
+            she studied Japanese and Chinese styles of acupuncture along with
+            Chinese herbology. In December 2022, she will graduate with her
+            clinical doctorate in acupuncture from the Pacific College of Health
+            Sciences in San Diego.
+          </Typography>
+        </Stack>
 
         <Section id="certifications">
           <Typography variant="h2">Certifications</Typography>
