@@ -80,9 +80,17 @@ const About: NextPage = ({ certifications, education }: Props) => {
                 width={20}
                 sx={{ mt: '8px' }}
               />
-              <Typography variant="body1">
-                633 Kreag Road Pittsford, NY 14534
-              </Typography>
+              <Link
+                sx={{ cursor: 'pointer' }}
+                underline="hover"
+                href="https://www.google.com/maps/place/633+Kreag+Rd,+Pittsford,+NY+14534/@43.061427,-77.473222,16z/data=!4m5!3m4!1s0x89d1347e53095137:0xd48f480a600885cf!8m2!3d43.061427!4d-77.4732222?hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Typography variant="body1">
+                  633 Kreag Road Pittsford, NY 14534
+                </Typography>
+              </Link>
             </Stack>
 
             <Stack direction="row" spacing={1} alignItems="flex-start">
@@ -109,6 +117,18 @@ const About: NextPage = ({ certifications, education }: Props) => {
                 <Typography variant="body1">Contact Us</Typography>
               </Stack>
             </Link>
+          </Box>
+
+          <Box sx={{ '& iframe': { border: 0 }, mt: 3 }}>
+            <iframe
+              id="google-map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2915.0492891324875!2d-77.47541088504529!3d43.061430898512675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d1347e53095137%3A0xd48f480a600885cf!2s633%20Kreag%20Rd%2C%20Pittsford%2C%20NY%2014534!5e0!3m2!1sen!2sus!4v1670540357854!5m2!1sen!2sus"
+              width="100%"
+              height="450"
+              allowFullScreen={false}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </Box>
         </Section>
 

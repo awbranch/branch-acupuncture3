@@ -112,8 +112,18 @@ const Footer = (): JSX.Element => {
                     sx={{ mt: '8px' }}
                   />
                   <Box>
-                    <Typography variant="body1">633 Kreag Road</Typography>
-                    <Typography variant="body1">Pittsford, NY 14534</Typography>
+                    <Link
+                      sx={{ cursor: 'pointer' }}
+                      underline="hover"
+                      href="https://www.google.com/maps/place/633+Kreag+Rd,+Pittsford,+NY+14534/@43.061427,-77.473222,16z/data=!4m5!3m4!1s0x89d1347e53095137:0xd48f480a600885cf!8m2!3d43.061427!4d-77.4732222?hl=en"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Typography variant="body1">633 Kreag Road</Typography>
+                      <Typography variant="body1">
+                        Pittsford, NY 14534
+                      </Typography>
+                    </Link>
                   </Box>
                 </Stack>
 
