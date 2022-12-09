@@ -2,12 +2,12 @@ import type { NextPage } from 'next';
 import Section from 'components/Section';
 import Main from 'layouts/main/Main';
 import Container from 'components/Container';
-import ScheduleAppointment from 'components/ScheduleAppointment';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import path from 'path';
 import { promises as fs } from 'fs';
 import Hero from 'components/Hero';
+import QuoteBox from 'components/QuoteBox';
 import Button from '@mui/material/Button';
 import { smoothScrollTo } from '../utils/utils';
 
@@ -75,7 +75,10 @@ const Services: NextPage = ({ services }: Props) => {
           </Section>
         ))}
 
-        <ScheduleAppointment />
+        <QuoteBox
+          text="Every human being is the author of their own health or disease"
+          author="Buddha"
+        />
       </Container>
     </Main>
   );

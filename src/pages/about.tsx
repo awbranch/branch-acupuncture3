@@ -15,6 +15,7 @@ import ScheduleAppointment from '../components/ScheduleAppointment';
 import Stack from '@mui/material/Stack';
 import React from 'react';
 import { smoothScrollTo } from '../utils/utils';
+import QuoteBox from '../components/QuoteBox';
 
 interface Props {
   certifications: Array<Certification>;
@@ -182,6 +183,7 @@ const About: NextPage = ({ certifications, education }: Props) => {
           </Typography>
           <ContactForm type="message" scrollToId="contact" />
         </Section>
+        <QuoteBox text="Health is the greatest possession." author="Lao Tzu" />
       </Container>
     </Main>
   );

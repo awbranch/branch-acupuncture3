@@ -14,6 +14,7 @@ import { smoothScrollTo } from '../utils/utils';
 import ContactForm from '../components/contactForm/ContactForm';
 import Link from '@mui/material/Link';
 import Markdown from 'markdown-to-jsx';
+import QuoteBox from '../components/QuoteBox';
 
 interface Props {
   questions: Array<Question>;
@@ -113,6 +114,11 @@ const Appointments: NextPage = ({ questions }: Props) => {
             ))}
           </List>
         </Section>
+
+        <QuoteBox
+          text="The natural healing force within each of us is the greatest force in getting well."
+          author="Hippocrates"
+        />
       </Container>
     </Main>
   );

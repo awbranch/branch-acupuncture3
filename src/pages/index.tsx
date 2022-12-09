@@ -5,7 +5,7 @@ import Section from 'components/Section';
 import ScheduleAppointment from 'components/ScheduleAppointment';
 import ServiceCard from 'components/ServiceCard';
 import Hero from 'components/Hero';
-import Reviews from 'components/Reviews';
+import ReviewCarousel from 'components/ReviewCarousel';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -16,9 +16,10 @@ import { smoothScrollTo } from 'utils/utils';
 
 interface Props {
   services: Array<Service>;
+  reviews: Array<Review>;
 }
 
-const Home: NextPage = ({ services }: Props) => {
+const Home: NextPage = ({ services, reviews }: Props) => {
   return (
     <Main colorInvert={true}>
       <Hero image="/hero/home.jpg">
@@ -95,7 +96,7 @@ const Home: NextPage = ({ services }: Props) => {
           <Typography variant="h2" sx={{ textAlign: 'center', mt: 20 }}>
             What People Are Saying
           </Typography>
-          <Reviews />
+          <ReviewCarousel reviews={reviews} />
         </Section>
       </Container>
     </Main>
@@ -103,11 +104,18 @@ const Home: NextPage = ({ services }: Props) => {
 };
 
 export async function getServerSideProps() {
-  const file = path.join(process.cwd(), 'data', 'services.json');
-  const services = JSON.parse(await fs.readFile(file, 'utf8'));
+  const services = JSON.parse(
+    await fs.readFile(
+      path.join(process.cwd(), 'data', 'services.json'),
+      'utf8',
+    ),
+  );
+  const reviews = JSON.parse(
+    await fs.readFile(path.join(process.cwd(), 'data', 'reviews.json'), 'utf8'),
+  );
 
   return {
-    props: { services },
+    props: { services, reviews },
   };
 }
 

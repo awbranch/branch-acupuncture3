@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Hero from 'components/Hero';
 import Button from '@mui/material/Button';
 import { smoothScrollTo } from '../utils/utils';
+import QuoteBox from '../components/QuoteBox';
 
 interface Props {
   elements: Array<Element>;
@@ -74,6 +75,11 @@ const Theory: NextPage = ({ elements }: Props) => {
             </Box>
           </Section>
         ))}
+
+        <QuoteBox
+          text="Acupuncture is the best preventative medicine on the planet."
+          author="Lonny Jarret, author of Nourishing Destiny"
+        />
       </Container>
     </Main>
   );
