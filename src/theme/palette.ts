@@ -5,6 +5,9 @@ export const light = {
     main: '#f7faff',
     dark: '#edf1f7',
   },
+  action: {
+    disabledBackground: 'rgba(255, 255, 255, .5)',
+  },
   cardShadow: 'rgba(23, 70, 161, .11)',
   mode: 'light' as PaletteMode,
   primary: {

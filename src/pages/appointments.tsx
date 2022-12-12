@@ -5,6 +5,7 @@ import Section from 'components/Section';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import path from 'path';
@@ -18,9 +19,10 @@ import QuoteBox from '../components/QuoteBox';
 
 interface Props {
   questions: Array<Question>;
+  seeingClients: boolean;
 }
 
-const Appointments: NextPage = ({ questions }: Props) => {
+const Appointments: NextPage = ({ questions, seeingClients }: Props) => {
   return (
     <Main colorInvert={true}>
       <Hero image="/hero/appointments.jpg">
@@ -34,13 +36,39 @@ const Appointments: NextPage = ({ questions }: Props) => {
           below. Existing clients can select “Book Now”
         </Typography>
 
+        {!seeingClients && (
+          <Box
+            sx={{
+              backgroundColor: 'text.highlight',
+              opacity: 0.9,
+              mt: 4,
+              px: 4,
+              py: 2,
+            }}
+          >
+            <Typography
+              variant="body1"
+              sx={{ color: 'common.white', textAlign: 'center' }}
+            >
+              Branch Acupuncture is not currently seeing clients.
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{ color: 'common.white', textAlign: 'center' }}
+            >
+              Please check back later.
+            </Typography>
+          </Box>
+        )}
+
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
           spacing={{ xs: 2, sm: 10 }}
           justifyContent="center"
-          sx={{ mt: 20, mb: 10, mx: 'auto' }}
+          sx={{ mt: seeingClients ? 20 : 5, mb: 10, mx: 'auto' }}
         >
           <Button
+            disabled={!seeingClients}
             component={'a'}
             variant="contained"
             color="secondary"
@@ -52,6 +80,7 @@ const Appointments: NextPage = ({ questions }: Props) => {
           </Button>
 
           <Button
+            disabled={!seeingClients}
             component={'a'}
             variant="contained"
             color="secondary"
@@ -67,23 +96,26 @@ const Appointments: NextPage = ({ questions }: Props) => {
       </Hero>
 
       <Container>
-        <Section id="new-client-signup">
-          <Typography variant="h2">New Client Signup</Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 5 }}>
-            If you are a new client of Branch Acupuncture center, or are unable
-            to use our{' '}
-            <Link
-              href="https://mollybranch.janeapp.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              online booking system
-            </Link>
-            , please fill in the following form with your name, phone number,
-            email address, and a brief message of the service you are seeking.
-          </Typography>
-          <ContactForm type="signup" scrollToId="new-client-signup" />
-        </Section>
+        {seeingClients && (
+          <Section id="new-client-signup">
+            <Typography variant="h2">New Client Signup</Typography>
+            <Typography variant="body1" paragraph sx={{ mb: 5 }}>
+              If you are a new client of Branch Acupuncture center, or are
+              unable to use our{' '}
+              <Link
+                href="https://mollybranch.janeapp.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                online booking system
+              </Link>
+              , please fill in the following form with your name, phone number,
+              email address, and a brief message of the service you are seeking.
+            </Typography>
+            <ContactForm type="signup" scrollToId="new-client-signup" />
+          </Section>
+        )}
+
         <Section id="questions">
           <Typography variant="h2">Questions</Typography>
           <List>
@@ -127,9 +159,10 @@ const Appointments: NextPage = ({ questions }: Props) => {
 export async function getServerSideProps() {
   const file = path.join(process.cwd(), 'data', 'questions.json');
   const questions = JSON.parse(await fs.readFile(file, 'utf8'));
+  const seeingClients = process.env.SEEING_CLIENTS !== 'false';
 
   return {
-    props: { questions },
+    props: { questions, seeingClients },
   };
 }
 
