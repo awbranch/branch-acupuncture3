@@ -48,8 +48,3 @@ This project is deployed on the [Vercel Platform](https://vercel.com/new?utm_med
 The Vercel deployment [branch-acupuncture](https://vercel.com/awbranch-gmailcom/branch-acupuncture)
 
 When code is pushed to the Github repo: [branch-acupuncture3](https://github.com/awbranch/branch-acupuncture3.git) it is automatically deployed to https://branch-acupuncture.vercel.app/
-
-## TODOs
-
-- Update the footer links to go to the proper hashes
--
