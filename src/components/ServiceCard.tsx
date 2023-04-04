@@ -25,7 +25,7 @@ const ServiceCard = ({ title, image, link }: Props): JSX.Element => (
         <Box
           component={LazyLoadImage}
           effect="blur"
-          src={`/services/${image}`}
+          src={image}
           alt={title}
           height={1}
           width={1}

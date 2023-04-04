@@ -9,17 +9,18 @@ import ListItem from '@mui/material/ListItem';
 import Link from '@mui/material/Link';
 import NextLink from 'next/link';
 import ContactForm from 'components/contactForm/ContactForm';
-import path from 'path';
-import { promises as fs } from 'fs';
 import ScheduleAppointment from '../components/ScheduleAppointment';
 import Stack from '@mui/material/Stack';
 import React from 'react';
 import { smoothScrollTo } from '../utils/utils';
 import QuoteBox from '../components/QuoteBox';
+import { IQualification } from 'types/contentful';
+import { createClient } from 'contentful';
+import { GetStaticProps } from 'next';
 
 interface Props {
-  certifications: Array<Certification>;
-  education: Array<Education>;
+  certifications: Array<IQualification>;
+  education: Array<IQualification>;
 }
 
 const About: NextPage = ({ certifications, education }: Props) => {
@@ -51,9 +52,12 @@ const About: NextPage = ({ certifications, education }: Props) => {
         <Section id="certifications">
           <Typography variant="h2">Certifications</Typography>
           <List sx={{ listStyleType: 'disc', pl: 4 }}>
-            {certifications.map((c, i) => (
-              <ListItem key={i} sx={{ display: 'list-item', p: 0, m: 0 }}>
-                <Typography variant="body1">{c.description}</Typography>
+            {certifications.map((c) => (
+              <ListItem
+                key={c.sys.id}
+                sx={{ display: 'list-item', p: 0, m: 0 }}
+              >
+                <Typography variant="body1">{c.fields.description}</Typography>
               </ListItem>
             ))}
           </List>
@@ -62,9 +66,12 @@ const About: NextPage = ({ certifications, education }: Props) => {
         <Section id="education">
           <Typography variant="h2">Education</Typography>
           <List sx={{ listStyleType: 'disc', pl: 4 }}>
-            {education.map((e, i) => (
-              <ListItem key={i} sx={{ display: 'list-item', p: 0, m: 0 }}>
-                <Typography variant="body1">{e.description}</Typography>
+            {education.map((e) => (
+              <ListItem
+                key={e.sys.id}
+                sx={{ display: 'list-item', p: 0, m: 0 }}
+              >
+                <Typography variant="body1">{e.fields.description}</Typography>
               </ListItem>
             ))}
           </List>
@@ -189,24 +196,27 @@ const About: NextPage = ({ certifications, education }: Props) => {
   );
 };
 
-export async function getServerSideProps() {
-  const certifications = JSON.parse(
-    await fs.readFile(
-      path.join(process.cwd(), 'data', 'certifications.json'),
-      'utf8',
-    ),
-  );
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  });
 
-  const education = JSON.parse(
-    await fs.readFile(
-      path.join(process.cwd(), 'data', 'education.json'),
-      'utf8',
-    ),
+  const qualifications = (
+    await client.getEntries({
+      content_type: 'qualification',
+      order: '-sys.createdAt',
+    })
+  ).items as IQualification[];
+
+  const certifications = qualifications.filter(
+    (q) => q.fields.type === 'certification',
   );
+  const education = qualifications.filter((q) => q.fields.type === 'education');
 
   return {
     props: { certifications, education },
   };
-}
+};
 
 export default About;
