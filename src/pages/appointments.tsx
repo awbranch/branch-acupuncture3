@@ -152,7 +152,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   const questions = (
     await client.getEntries({
       content_type: 'question',
-      order: 'sys.createdAt',
+      order: 'fields.order',
     })
   ).items as IQuestion[];
 

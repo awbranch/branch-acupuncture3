@@ -117,6 +117,9 @@ export interface IQuestionFields {
 
   /** Answer */
   answer?: Document | undefined;
+
+  /** Order */
+  order: number;
 }
 
 /** Frequently Asked Questions */
