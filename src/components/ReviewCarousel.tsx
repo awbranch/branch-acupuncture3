@@ -7,9 +7,10 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { IReview } from 'types/contentful';
 
 interface Props {
-  reviews: Array<Review>;
+  reviews: Array<IReview>;
 }
 
 const ReviewCarousel = ({ reviews }: Props): JSX.Element => {
@@ -48,7 +49,7 @@ const ReviewCarousel = ({ reviews }: Props): JSX.Element => {
                   }}
                 >
                   <Typography align={'center'} variant={'body1'}>
-                    {review.text}
+                    {review.fields.text}
                   </Typography>
                 </CardContent>
                 <Box flexGrow={1} />
@@ -56,7 +57,7 @@ const ReviewCarousel = ({ reviews }: Props): JSX.Element => {
                   <ListItem component="div" disableGutters sx={{ padding: 0 }}>
                     <ListItemText
                       sx={{ margin: 0 }}
-                      primary={`— ${review.name}`}
+                      primary={`— ${review.fields.name}`}
                     />
                   </ListItem>
                 </CardActions>

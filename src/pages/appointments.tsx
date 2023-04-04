@@ -8,17 +8,18 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import path from 'path';
-import { promises as fs } from 'fs';
 import Hero from 'components/Hero';
 import { smoothScrollTo } from '../utils/utils';
 import ContactForm from '../components/contactForm/ContactForm';
 import Link from '@mui/material/Link';
-import Markdown from 'markdown-to-jsx';
 import QuoteBox from '../components/QuoteBox';
+import { IQuestion } from 'types/contentful';
+import { createClient } from 'contentful';
+import { GetStaticProps } from 'next';
+import RichText from 'components/RichText';
 
 interface Props {
-  questions: Array<Question>;
+  questions: Array<IQuestion>;
   seeingClients: boolean;
 }
 
@@ -121,27 +122,13 @@ const Appointments: NextPage = ({ questions, seeingClients }: Props) => {
           <List>
             {questions.map((question) => (
               <ListItem
-                key={question.id}
-                sx={{ display: 'block', px: 0, py: 3 }}
+                key={question.sys.id}
+                sx={{ display: 'block', px: 0, pt: 3, pb: 1 }}
               >
                 <Typography variant="h3" sx={{ mb: 2 }}>
-                  {question.question}
+                  {question.fields.question}
                 </Typography>
-                <Markdown
-                  options={{
-                    overrides: {
-                      p: {
-                        component: Typography,
-                        props: { variant: 'body1' },
-                      },
-                      a: {
-                        component: Link,
-                      },
-                    },
-                  }}
-                >
-                  {question.answer}
-                </Markdown>
+                <RichText document={question.fields.answer} />
               </ListItem>
             ))}
           </List>
@@ -156,14 +143,24 @@ const Appointments: NextPage = ({ questions, seeingClients }: Props) => {
   );
 };
 
-export async function getServerSideProps() {
-  const file = path.join(process.cwd(), 'data', 'questions.json');
-  const questions = JSON.parse(await fs.readFile(file, 'utf8'));
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  });
+
+  const questions = (
+    await client.getEntries({
+      content_type: 'question',
+      order: 'sys.createdAt',
+    })
+  ).items as IQuestion[];
+
   const seeingClients = process.env.SEEING_CLIENTS !== 'false';
 
   return {
     props: { questions, seeingClients },
   };
-}
+};
 
 export default Appointments;

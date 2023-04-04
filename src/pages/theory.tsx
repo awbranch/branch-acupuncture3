@@ -2,17 +2,19 @@ import type { NextPage } from 'next';
 import Main from 'layouts/main/Main';
 import Container from 'components/Container';
 import Typography from '@mui/material/Typography';
-import path from 'path';
-import { promises as fs } from 'fs';
 import Section from '../components/Section';
 import Box from '@mui/material/Box';
 import Hero from 'components/Hero';
 import Button from '@mui/material/Button';
 import { smoothScrollTo } from '../utils/utils';
 import QuoteBox from '../components/QuoteBox';
+import { IElement } from 'types/contentful';
+import { createClient } from 'contentful';
+import { GetStaticProps } from 'next';
+import RichText from '../components/RichText';
 
 interface Props {
-  elements: Array<Element>;
+  elements: Array<IElement>;
 }
 
 const Theory: NextPage = ({ elements }: Props) => {
@@ -55,21 +57,21 @@ const Theory: NextPage = ({ elements }: Props) => {
       </Hero>
       <Container id="elements">
         {elements.map((element) => (
-          <Section key={element.id} id={element.id}>
+          <Section key={element.sys.id} id={element.fields.slug}>
             <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="h2">{element.name}</Typography>
-              <Typography variant="body1">{element.description}</Typography>
+              <Typography variant="h2">{element.fields.name}</Typography>
+              <RichText document={element.fields.description} />
               <Box
                 sx={{ mx: 'auto', mt: 2 }}
                 component={'img'}
                 display={'block'}
-                src={`elements/${element.image}`}
+                src={element.fields.image.fields.file.url}
                 width={250}
                 height={250}
               />
               <Box sx={{ maxWidth: '250px', mx: 'auto', mb: 4 }}>
                 <Typography component="div" variant="caption">
-                  {element.caption}
+                  {element.fields.caption}
                 </Typography>
               </Box>
             </Box>
@@ -85,13 +87,22 @@ const Theory: NextPage = ({ elements }: Props) => {
   );
 };
 
-export async function getServerSideProps() {
-  const file = path.join(process.cwd(), 'data', 'elements.json');
-  const elements = JSON.parse(await fs.readFile(file, 'utf8'));
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  });
+
+  const elements = (
+    await client.getEntries({
+      content_type: 'element',
+      order: 'fields.order',
+    })
+  ).items as IElement[];
 
   return {
     props: { elements },
   };
-}
+};
 
 export default Theory;

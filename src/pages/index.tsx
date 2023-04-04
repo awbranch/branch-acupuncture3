@@ -10,13 +10,14 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import path from 'path';
-import { promises as fs } from 'fs';
 import { smoothScrollTo } from 'utils/utils';
+import { IService, IReview } from 'types/contentful';
+import { createClient } from 'contentful';
+import { GetStaticProps } from 'next';
 
 interface Props {
-  services: Array<Service>;
-  reviews: Array<Review>;
+  services: Array<IService>;
+  reviews: Array<IReview>;
 }
 
 const Home: NextPage = ({ services, reviews }: Props) => {
@@ -81,11 +82,11 @@ const Home: NextPage = ({ services, reviews }: Props) => {
             direction="row"
           >
             {services.map((service) => (
-              <Grid key={service.id} item xs={12} sm={6} md={4}>
+              <Grid key={service.sys.id} item xs={12} sm={6} md={4}>
                 <ServiceCard
-                  title={service.name}
-                  image={service.image}
-                  link={`/services#${service.id}`}
+                  title={service.fields.name}
+                  image={service.fields.image.fields.file.url}
+                  link={`/services#${service.fields.slug}`}
                 />
               </Grid>
             ))}
@@ -103,20 +104,27 @@ const Home: NextPage = ({ services, reviews }: Props) => {
   );
 };
 
-export async function getServerSideProps() {
-  const services = JSON.parse(
-    await fs.readFile(
-      path.join(process.cwd(), 'data', 'services.json'),
-      'utf8',
-    ),
-  );
-  const reviews = JSON.parse(
-    await fs.readFile(path.join(process.cwd(), 'data', 'reviews.json'), 'utf8'),
-  );
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  });
+
+  const services = (
+    await client.getEntries({
+      content_type: 'service',
+    })
+  ).items as IService[];
+
+  const reviews = (
+    await client.getEntries({
+      content_type: 'review',
+    })
+  ).items as IReview[];
 
   return {
     props: { services, reviews },
   };
-}
+};
 
 export default Home;

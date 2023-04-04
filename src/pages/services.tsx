@@ -4,15 +4,17 @@ import Main from 'layouts/main/Main';
 import Container from 'components/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import path from 'path';
-import { promises as fs } from 'fs';
 import Hero from 'components/Hero';
 import QuoteBox from 'components/QuoteBox';
 import Button from '@mui/material/Button';
 import { smoothScrollTo } from '../utils/utils';
+import { IService } from 'types/contentful';
+import { createClient } from 'contentful';
+import { GetStaticProps } from 'next';
+import RichText from '../components/RichText';
 
 interface Props {
-  services: Array<Service>;
+  services: Array<IService>;
 }
 
 const Services: NextPage = ({ services }: Props) => {
@@ -55,13 +57,13 @@ const Services: NextPage = ({ services }: Props) => {
       </Hero>
       <Container id="services">
         {services.map((service) => (
-          <Section key={service.id} id={service.id}>
-            <Typography variant="h2">{service.name}</Typography>
-            <Typography variant="body1">{service.description}</Typography>
+          <Section key={service.sys.id} id={service.fields.slug}>
+            <Typography variant="h2">{service.fields.name}</Typography>
+            <RichText document={service.fields.description} />
             <Box
               component={'img'}
               display={'block'}
-              src={`services/${service.image}`}
+              src={`${service.fields.image.fields.file.url}`}
               height={1}
               width={1}
             />
@@ -70,7 +72,7 @@ const Services: NextPage = ({ services }: Props) => {
               display={'block'}
               sx={{ mt: '2px', p: 0 }}
             >
-              {service.caption}
+              {service.fields.caption}
             </Typography>
           </Section>
         ))}
@@ -84,13 +86,21 @@ const Services: NextPage = ({ services }: Props) => {
   );
 };
 
-export async function getServerSideProps() {
-  const file = path.join(process.cwd(), 'data', 'services.json');
-  const services = JSON.parse(await fs.readFile(file, 'utf8'));
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  });
+
+  const services = (
+    await client.getEntries({
+      content_type: 'service',
+    })
+  ).items as IService[];
 
   return {
     props: { services },
   };
-}
+};
 
 export default Services;
