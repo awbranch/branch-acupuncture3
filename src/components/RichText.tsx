@@ -19,9 +19,9 @@ const RichText = ({ document }: Props): JSX.Element => {
             </Typography>
           ),
           [INLINES.HYPERLINK]: (node, children) => (
-            <NextLink href={node.data.uri} passHref>
-              <Link>{children}</Link>
-            </NextLink>
+            <Link component={NextLink} href={node.data.uri}>
+              {children}
+            </Link>
           ),
         },
       })}

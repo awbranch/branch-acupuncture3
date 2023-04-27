@@ -9,11 +9,11 @@ import ListItem from '@mui/material/ListItem';
 import Link from '@mui/material/Link';
 import NextLink from 'next/link';
 import ContactForm from 'components/contactForm/ContactForm';
-import ScheduleAppointment from '../components/ScheduleAppointment';
+import ScheduleAppointment from 'components/ScheduleAppointment';
 import Stack from '@mui/material/Stack';
 import React from 'react';
-import { smoothScrollTo } from '../utils/utils';
-import QuoteBox from '../components/QuoteBox';
+import { smoothScrollTo } from 'utils/utils';
+import QuoteBox from 'components/QuoteBox';
 import { IQualification } from 'types/contentful';
 import { createClient } from 'contentful';
 import { GetStaticProps } from 'next';
@@ -183,9 +183,9 @@ const About: NextPage = ({ certifications, education }: Props) => {
             Please use this form to ask any questions of Branch Acupuncture
             Center. If you are interested in becoming a new client, please use
             our{' '}
-            <NextLink href="/appointments#new-client-signup" passHref>
-              <Link>new client signup</Link>
-            </NextLink>{' '}
+            <Link href="/appointments#new-client-signup" component={NextLink}>
+              new client signup
+            </Link>{' '}
             form instead.
           </Typography>
           <ContactForm type="message" scrollToId="contact" />

@@ -12,38 +12,40 @@ interface Props {
 }
 
 const ServiceCard = ({ title, image, link }: Props): JSX.Element => (
-  <NextLink href={link} passHref>
-    <Link sx={{ textDecoration: 'none !important' }}>
+  <Link
+    component={NextLink}
+    href={link}
+    sx={{ textDecoration: 'none !important' }}
+  >
+    <Box
+      padding={2}
+      bgcolor={'background.paper'}
+      borderRadius={2}
+      overflow={'hidden'}
+      boxShadow={3}
+      marginBottom={2}
+    >
       <Box
-        padding={2}
-        bgcolor={'background.paper'}
-        borderRadius={2}
-        overflow={'hidden'}
-        boxShadow={3}
-        marginBottom={2}
-      >
-        <Box
-          component={LazyLoadImage}
-          effect="blur"
-          src={image}
-          alt={title}
-          height={1}
-          width={1}
-          sx={{
-            transition: 'opacity, transform ease 0.3s !important',
-            filter: 'grayscale(100%)',
-            '&:hover': {
-              transform: 'scale(1.02)',
-              filter: 'none',
-            },
-          }}
-        />
-        <Box display={'flex'} justifyContent={'center'}>
-          <Typography variant={'body1'}>{title}</Typography>
-        </Box>
+        component={LazyLoadImage}
+        effect="blur"
+        src={image}
+        alt={title}
+        height={1}
+        width={1}
+        sx={{
+          transition: 'opacity, transform ease 0.3s !important',
+          filter: 'grayscale(100%)',
+          '&:hover': {
+            transform: 'scale(1.02)',
+            filter: 'none',
+          },
+        }}
+      />
+      <Box display={'flex'} justifyContent={'center'}>
+        <Typography variant={'body1'}>{title}</Typography>
       </Box>
-    </Link>
-  </NextLink>
+    </Box>
+  </Link>
 );
 
 export default ServiceCard;

@@ -88,15 +88,15 @@ const Footer = (): JSX.Element => {
                   <Stack direction="column">
                     {column.map((row, r) => (
                       <Typography variant="body1" key={r}>
-                        <NextLink href={row.href} passHref>
-                          <Link
-                            sx={{
-                              textDecoration: 'none',
-                            }}
-                          >
-                            {row.name}
-                          </Link>
-                        </NextLink>
+                        <Link
+                          component={NextLink}
+                          href={row.href}
+                          sx={{
+                            textDecoration: 'none',
+                          }}
+                        >
+                          {row.name}
+                        </Link>
                       </Typography>
                     ))}
                   </Stack>

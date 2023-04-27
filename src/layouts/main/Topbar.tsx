@@ -21,10 +21,9 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }: Props): JSX.Element => {
       alignItems={'center'}
       width={1}
     >
-      <NextLink href="/" passHref>
+      <NextLink href="/">
         <Box
           display={'flex'}
-          component="a"
           title="Branch Acupuncture Center"
           width={{ xs: 100, md: 120 }}
         >

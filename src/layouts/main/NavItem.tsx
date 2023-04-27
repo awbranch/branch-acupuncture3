@@ -21,22 +21,21 @@ const NavItem = ({ title, link, colorInvert }: Props): JSX.Element => {
 
   return (
     <Box>
-      <NextLink href={link} passHref>
-        <Link
-          underline={hasActiveLink ? 'always' : 'hover'}
-          component="a"
-          color={linkColor}
-          sx={{
-            fontSize: '1rem',
-            fontWeight: 400,
-            textDecorationThickness: '2px',
-          }}
-        >
-          <Typography variant="h4" component="span">
-            {title}
-          </Typography>
-        </Link>
-      </NextLink>
+      <Link
+        href={link}
+        component={NextLink}
+        underline={hasActiveLink ? 'always' : 'hover'}
+        color={linkColor}
+        sx={{
+          fontSize: '1rem',
+          fontWeight: 400,
+          textDecorationThickness: '2px',
+        }}
+      >
+        <Typography variant="h4" component="span">
+          {title}
+        </Typography>
+      </Link>
     </Box>
   );
 };
