@@ -5,8 +5,8 @@ import ErrorMessage from './components/ErrorMessage';
 import ProcessingMessage from './components/ProcessingMessage';
 import SuccessMessage from './components/SuccessMessage';
 import { smoothScrollTo } from '@/utils/utils';
-import { FormType } from '@/types/formType';
-import { ContactInfo } from '@/types/contact';
+import type { FormType } from '@/types/formType';
+import type { ContactInfo } from '@/types/contact';
 
 type Status = 'start' | 'processing' | 'ok' | 'error';
 

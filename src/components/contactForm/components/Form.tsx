@@ -5,6 +5,8 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { useFormik } from 'formik';
 import { messageSchema, signupSchema } from 'utils/contactInfoSchema';
+import type { FormType } from '@/types/formType';
+import type { ContactInfo } from '@/types/contact';
 
 interface Props {
   type: FormType;

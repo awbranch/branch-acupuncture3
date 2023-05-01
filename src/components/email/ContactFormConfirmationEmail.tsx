@@ -1,5 +1,6 @@
 import React from 'react';
 import { Page, Logo, Title, Text, Para } from './elements';
+import type { ContactInfo } from '@/types/contact';
 
 interface Props {
   info: ContactInfo;

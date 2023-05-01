@@ -5,6 +5,7 @@ import ContactFormSubmittedEmail from 'components/email/ContactFormSubmittedEmai
 import ContactFormConfirmationEmail from 'components/email/ContactFormConfirmationEmail';
 import { messageSchema, signupSchema } from 'utils/contactInfoSchema';
 import path from 'path';
+import { ContactInfo } from '@/types/contact';
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,

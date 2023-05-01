@@ -10,6 +10,8 @@ import {
   Text,
 } from './elements';
 
+import { ContactInfo } from '@/types/contact';
+
 interface Props {
   info: ContactInfo;
   logoPath: string;

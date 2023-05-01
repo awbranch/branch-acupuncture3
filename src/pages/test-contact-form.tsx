@@ -7,6 +7,7 @@ import Divider from '@mui/material/Divider';
 import Container from 'components/Container';
 import ContactFormConfirmationEmail from 'components/email/ContactFormConfirmationEmail';
 import ContactFormSubmittedEmail from 'components/email/ContactFormSubmittedEmail';
+import { FormType } from '@/types/formType';
 
 const TestContactForm: NextPage = () => {
   const [formType, setFormType] = useState<FormType>('message');

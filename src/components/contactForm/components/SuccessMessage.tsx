@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
+import type { FormType } from '@/types/formType';
 
 interface Props {
   type: FormType;
