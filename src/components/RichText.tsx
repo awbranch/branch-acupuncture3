@@ -1,31 +1,40 @@
 import Typography from '@mui/material/Typography';
 import NextLink from 'next/link';
 import Link from '@mui/material/Link';
-import { BLOCKS, INLINES, Document } from '@contentful/rich-text-types';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { PortableTextBlock } from 'sanity';
+import { PortableText } from '@portabletext/react';
 
 interface Props {
-  document: Document;
+  document: PortableTextBlock[];
 }
 
 const RichText = ({ document }: Props): JSX.Element => {
+  const components = {
+    marks: {
+      link: ({ children, value }) => (
+        <Link component={NextLink} href={value.href}>
+          {children}
+        </Link>
+      ),
+    },
+    block: {
+      h2: ({ children }) => (
+        <Typography variant="h2" paragraph>
+          {children}
+        </Typography>
+      ),
+      normal: ({ children }) => (
+        <Typography variant="body1" paragraph>
+          {children}
+        </Typography>
+      ),
+    },
+  };
+
   return (
-    <>
-      {documentToReactComponents(document, {
-        renderNode: {
-          [BLOCKS.PARAGRAPH]: (node, children) => (
-            <Typography variant="body1" paragraph>
-              {children}
-            </Typography>
-          ),
-          [INLINES.HYPERLINK]: (node, children) => (
-            <Link component={NextLink} href={node.data.uri}>
-              {children}
-            </Link>
-          ),
-        },
-      })}
-    </>
+    <div>
+      <PortableText value={document} components={components as any} />
+    </div>
   );
 };
 

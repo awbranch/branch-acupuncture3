@@ -1,20 +1,19 @@
-import type { NextPage } from 'next';
-import Main from 'layouts/main/Main';
-import Container from 'components/Container';
+import type { NextPage, GetStaticProps } from 'next';
 import Typography from '@mui/material/Typography';
-import Section from '../components/Section';
 import Box from '@mui/material/Box';
-import Hero from 'components/Hero';
 import Button from '@mui/material/Button';
-import { smoothScrollTo } from '../utils/utils';
-import QuoteBox from '../components/QuoteBox';
-import { IElement } from 'types/contentful';
-import { createClient } from 'contentful';
-import { GetStaticProps } from 'next';
-import RichText from '../components/RichText';
+import Main from '@/layouts/main/Main';
+import Container from '@/components/Container';
+import Section from '@/components/Section';
+import Hero from '@/components/Hero';
+import QuoteBox from '@/components/QuoteBox';
+import RichText from '@/components/RichText';
+import { smoothScrollTo } from '@/utils/utils';
+import { getElements } from '@/sanity/utils';
+import { Element } from '@/types/element';
 
 interface Props {
-  elements: Array<IElement>;
+  elements: Array<Element>;
 }
 
 const Theory: NextPage = ({ elements }: Props) => {
@@ -57,21 +56,21 @@ const Theory: NextPage = ({ elements }: Props) => {
       </Hero>
       <Container id="elements">
         {elements.map((element) => (
-          <Section key={element.sys.id} id={element.fields.slug}>
+          <Section key={element._id} id={element.slug}>
             <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="h2">{element.fields.name}</Typography>
-              <RichText document={element.fields.description} />
+              <Typography variant="h2">{element.name}</Typography>
+              <RichText document={element.description} />
               <Box
                 sx={{ mx: 'auto', mt: 2 }}
                 component={'img'}
                 display={'block'}
-                src={element.fields.image.fields.file.url}
+                src={element.image}
                 width={250}
                 height={250}
               />
               <Box sx={{ maxWidth: '250px', mx: 'auto', mb: 4 }}>
                 <Typography component="div" variant="caption">
-                  {element.fields.caption}
+                  {element.caption}
                 </Typography>
               </Box>
             </Box>
@@ -88,17 +87,7 @@ const Theory: NextPage = ({ elements }: Props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-  });
-
-  const elements = (
-    await client.getEntries({
-      content_type: 'element',
-      order: 'fields.order',
-    })
-  ).items as IElement[];
+  const elements = await getElements();
 
   return {
     props: { elements },

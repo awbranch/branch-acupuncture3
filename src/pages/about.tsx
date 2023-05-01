@@ -1,80 +1,61 @@
-import type { NextPage } from 'next';
-import Main from 'layouts/main/Main';
-import Container from 'components/Container';
-import Section from 'components/Section';
-import Typography from '@mui/material/Typography';
+import type { NextPage, GetStaticProps } from 'next';
 import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import Link from '@mui/material/Link';
 import NextLink from 'next/link';
-import ContactForm from 'components/contactForm/ContactForm';
-import ScheduleAppointment from 'components/ScheduleAppointment';
 import Stack from '@mui/material/Stack';
-import React from 'react';
-import { smoothScrollTo } from 'utils/utils';
-import QuoteBox from 'components/QuoteBox';
-import { IQualification } from 'types/contentful';
-import { createClient } from 'contentful';
-import { GetStaticProps } from 'next';
+import Typography from '@mui/material/Typography';
+import Main from '@/layouts/main/Main';
+import Container from '@/components/Container';
+import Section from '@/components/Section';
+import ContactForm from '@/components/contactForm/ContactForm';
+import ScheduleAppointment from '@/components/ScheduleAppointment';
+import { smoothScrollTo } from '@/utils/utils';
+import QuoteBox from '@/components/QuoteBox';
+import { getAboutPage } from '@/sanity/utils';
+import { PortableTextBlock } from 'sanity';
+import RichText from '@/components/RichText';
 
 interface Props {
-  certifications: Array<IQualification>;
-  education: Array<IQualification>;
+  name: string;
+  bioImage: string;
+  biography: PortableTextBlock[];
+  certifications: PortableTextBlock[];
+  education: PortableTextBlock[];
+  history: PortableTextBlock[];
+  officeImage: string;
 }
 
-const About: NextPage = ({ certifications, education }: Props) => {
+const About: NextPage = ({
+  name,
+  bioImage,
+  biography,
+  certifications,
+  education,
+  history,
+  officeImage,
+}: Props) => {
   return (
     <Main>
       <Container>
-        <Typography variant="h1">Molly Branch</Typography>
+        <Typography variant="h1">{name}</Typography>
 
         <Stack
           direction={{ xs: 'column', md: 'row' }}
           spacing={4}
           alignItems="flex-start"
         >
-          <Box component="img" src="/headshot.jpg" width={{ xs: 1, md: 390 }} />
-          <Typography variant="body1">
-            Molly Branch Shill is a licensed acupuncturist in New York State and
-            board-certified by the National Certification Commission for
-            Acupuncture and Oriental Medicine. Molly holds a Master of
-            Professional Studies degree in Community Services Administration
-            from Alfred University. She also has a master&apos;s degree in
-            acupuncture from the New England School of Acupuncture (NESA), where
-            she studied Japanese and Chinese styles of acupuncture along with
-            Chinese herbology. In December 2022, she will graduate with her
-            clinical doctorate in acupuncture from the Pacific College of Health
-            Sciences in San Diego.
-          </Typography>
+          <Box component="img" src={bioImage} width={{ xs: 1, md: 390 }} />
+          <RichText document={biography} />
         </Stack>
 
         <Section id="certifications">
           <Typography variant="h2">Certifications</Typography>
-          <List sx={{ listStyleType: 'disc', pl: 4 }}>
-            {certifications.map((c) => (
-              <ListItem
-                key={c.sys.id}
-                sx={{ display: 'list-item', p: 0, m: 0 }}
-              >
-                <Typography variant="body1">{c.fields.description}</Typography>
-              </ListItem>
-            ))}
-          </List>
+          <RichText document={certifications} />
         </Section>
 
         <Section id="education">
           <Typography variant="h2">Education</Typography>
-          <List sx={{ listStyleType: 'disc', pl: 4 }}>
-            {education.map((e) => (
-              <ListItem
-                key={e.sys.id}
-                sx={{ display: 'list-item', p: 0, m: 0 }}
-              >
-                <Typography variant="body1">{e.fields.description}</Typography>
-              </ListItem>
-            ))}
-          </List>
+          <RichText document={education} />
         </Section>
 
         <Section id="office">
@@ -144,21 +125,11 @@ const About: NextPage = ({ certifications, education }: Props) => {
 
         <Section id="history">
           <Typography variant="h2">History</Typography>
-          <Typography variant="body1">
-            Branch Acupuncture Center has been in existence in the Rochester
-            area since 2001. Our original office was at 35 North Goodman Street
-            in Rochester. Eventually, we found our way to an old chapel at 2
-            Thornell Road in Bushnell’s Basin. This year, we opened our newest
-            and last clinic at 633 Kreag Road, also in Bushnell’s Basin. This
-            building was previously owned by Deeanne Bevin, an acupuncturist in
-            the area, for the past 30 years. Molly is excited to work in this
-            new to her space which Deeanne and so many of her clients have loved
-            over the years.
-          </Typography>
+          <RichText document={history} />
           <Box
             component={'img'}
             display={'block'}
-            src={'office.jpg'}
+            src={officeImage}
             sx={{ mt: 5 }}
             height={1}
             width={1}
@@ -197,25 +168,18 @@ const About: NextPage = ({ certifications, education }: Props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-  });
-
-  const qualifications = (
-    await client.getEntries({
-      content_type: 'qualification',
-      order: '-sys.createdAt',
-    })
-  ).items as IQualification[];
-
-  const certifications = qualifications.filter(
-    (q) => q.fields.type === 'certification',
-  );
-  const education = qualifications.filter((q) => q.fields.type === 'education');
+  const meta = await getAboutPage();
 
   return {
-    props: { certifications, education },
+    props: {
+      name: meta.name,
+      bioImage: meta.bioImage,
+      biography: meta.biography,
+      certifications: meta.certifications,
+      education: meta.education,
+      history: meta.history,
+      officeImage: meta.officeImage,
+    },
   };
 };
 

@@ -1,23 +1,23 @@
-import type { NextPage } from 'next';
-import Main from 'layouts/main/Main';
-import Container from 'components/Container';
-import Section from 'components/Section';
-import ScheduleAppointment from 'components/ScheduleAppointment';
-import ServiceCard from 'components/ServiceCard';
-import Hero from 'components/Hero';
-import ReviewCarousel from 'components/ReviewCarousel';
-import Button from '@mui/material/Button';
+import type { NextPage, GetStaticProps } from 'next';
+import Main from '@/layouts/main/Main';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { smoothScrollTo } from 'utils/utils';
-import { IService, IReview } from 'types/contentful';
-import { createClient } from 'contentful';
-import { GetStaticProps } from 'next';
+import Container from '@/components/Container';
+import Hero from '@/components/Hero';
+import Section from '@/components/Section';
+import ReviewCarousel from '@/components/ReviewCarousel';
+import ServiceCard from '@/components/ServiceCard';
+import ScheduleAppointment from '@/components/ScheduleAppointment';
+import { smoothScrollTo } from '@/utils/utils';
+import { getReviews, getServices } from '@/sanity/utils';
+import { Review } from '@/types/review';
+import { Service } from '@/types/service';
 
 interface Props {
-  services: Array<IService>;
-  reviews: Array<IReview>;
+  services: Array<Service>;
+  reviews: Array<Review>;
 }
 
 const Home: NextPage = ({ services, reviews }: Props) => {
@@ -82,11 +82,11 @@ const Home: NextPage = ({ services, reviews }: Props) => {
             direction="row"
           >
             {services.map((service) => (
-              <Grid key={service.sys.id} item xs={12} sm={6} md={4}>
+              <Grid key={service._id} item xs={12} sm={6} md={4}>
                 <ServiceCard
-                  title={service.fields.name}
-                  image={service.fields.image.fields.file.url}
-                  link={`/services#${service.fields.slug}`}
+                  title={service.name}
+                  image={service.image}
+                  link={`/services#${service.slug}`}
                 />
               </Grid>
             ))}
@@ -105,22 +105,8 @@ const Home: NextPage = ({ services, reviews }: Props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-  });
-
-  const services = (
-    await client.getEntries({
-      content_type: 'service',
-    })
-  ).items as IService[];
-
-  const reviews = (
-    await client.getEntries({
-      content_type: 'review',
-    })
-  ).items as IReview[];
+  const services = await getServices();
+  const reviews = await getReviews();
 
   return {
     props: { services, reviews },

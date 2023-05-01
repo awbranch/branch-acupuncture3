@@ -1,25 +1,25 @@
 import type { NextPage } from 'next';
+import { GetStaticProps } from 'next';
 import Main from 'layouts/main/Main';
-import Container from 'components/Container';
-import Section from 'components/Section';
+import Container from '@/components/Container';
+import Section from '@/components/Section';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import Hero from 'components/Hero';
-import { smoothScrollTo } from '../utils/utils';
-import ContactForm from '../components/contactForm/ContactForm';
+import Hero from '@/components/Hero';
+import { smoothScrollTo } from '@/utils/utils';
+import ContactForm from '@/components/contactForm/ContactForm';
 import Link from '@mui/material/Link';
-import QuoteBox from '../components/QuoteBox';
-import { IQuestion } from 'types/contentful';
-import { createClient } from 'contentful';
-import { GetStaticProps } from 'next';
-import RichText from 'components/RichText';
+import QuoteBox from '@/components/QuoteBox';
+import RichText from '@/components/RichText';
+import { getQuestions } from '@/sanity/utils';
+import { Question } from '@/types/question';
 
 interface Props {
-  questions: Array<IQuestion>;
+  questions: Array<Question>;
   seeingClients: boolean;
 }
 
@@ -122,13 +122,13 @@ const Appointments: NextPage = ({ questions, seeingClients }: Props) => {
           <List>
             {questions.map((question) => (
               <ListItem
-                key={question.sys.id}
+                key={question._id}
                 sx={{ display: 'block', px: 0, pt: 3, pb: 1 }}
               >
                 <Typography variant="h3" sx={{ mb: 2 }}>
-                  {question.fields.question}
+                  {question.question}
                 </Typography>
-                <RichText document={question.fields.answer} />
+                <RichText document={question.answer} />
               </ListItem>
             ))}
           </List>
@@ -144,17 +144,7 @@ const Appointments: NextPage = ({ questions, seeingClients }: Props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-  });
-
-  const questions = (
-    await client.getEntries({
-      content_type: 'question',
-      order: 'fields.order',
-    })
-  ).items as IQuestion[];
+  const questions = await getQuestions();
 
   const seeingClients = process.env.SEEING_CLIENTS !== 'false';
 

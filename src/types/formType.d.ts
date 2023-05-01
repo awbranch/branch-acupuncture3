@@ -1,1 +1,0 @@
-type FormType = 'message' | 'signup';

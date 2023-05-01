@@ -1,4 +1,4 @@
-interface PageItem {
+export type PageItem = {
   groupTitle: string;
   pages: Array<{
     title: string;
@@ -6,4 +6,4 @@ interface PageItem {
     href: string;
     target?: string;
   }>;
-}
+};

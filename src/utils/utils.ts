@@ -1,6 +1,6 @@
 export const smoothScrollTo = (id: string, offset: number): void => {
   setTimeout(() => {
-    const element: HTMLElement = document.querySelector(`#${id}`);
+    const element = document.getElementById(id);
     if (!element) {
       return;
     }
