@@ -50,6 +50,15 @@ The Vercel deployment [branch-acupuncture](https://vercel.com/awbranch-gmailcom/
 When code is pushed to the Github repo: [branch-acupuncture3](https://github.com/awbranch/branch-acupuncture3.git) it is automatically deployed to https://branch-acupuncture.vercel.app/
 
 
+## Sanity CMS
+
+This project uses sanity.io as a CMS
+https://www.sanity.io/
+Project [Branch Acupuncture](https://www.sanity.io/manage/personal/project/5wlp5gt3)
+
+You can access the CMS at the /admin route of this project.
+
+
 ## TODOs
 
 - Update the footer links to go to the proper hashes
