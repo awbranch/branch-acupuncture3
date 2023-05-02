@@ -39,6 +39,7 @@
     "sanity": "^3.9.1",
     "sanity-plugin-vercel-deploy": "^3.3.3",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^5.3.10",
     "typescript": "5.0.4",
     "yup": "^0.32.11"
   }

@@ -1,12 +1,7 @@
-import {
-  orderRankField,
-  orderRankOrdering,
-} from '@sanity/orderable-document-list';
-
 const review = {
   name: 'review',
   title: 'Review',
-  type: 'document',
+  type: 'object',
   fields: [
     {
       name: 'text',
@@ -30,26 +25,7 @@ const review = {
       title: 'text',
       subtitle: 'name',
     },
-    prepare(selection) {
-      const { title, subtitle } = selection;
-      return {
-        title: title.substr(0, 20) + '...',
-        subtitle,
-      };
-    },
   },
-  // orderings: [
-  //   {
-  //     title: 'Name',
-  //     name: 'nameAsc',
-  //     by: [{ field: 'name', direction: 'asc' }],
-  //   },
-  //   {
-  //     title: 'Name Desc',
-  //     name: 'nameDesc',
-  //     by: [{ field: 'name', direction: 'desc' }],
-  //   },
-  // ],
 };
 
 export default review;

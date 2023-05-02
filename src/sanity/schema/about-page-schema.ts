@@ -98,6 +98,13 @@ const aboutPage = {
       validation: (Rule) => Rule.required(),
     },
   ],
+  preview: {
+    prepare() {
+      return {
+        title: 'About Page',
+      };
+    },
+  },
 };
 
 export default aboutPage;

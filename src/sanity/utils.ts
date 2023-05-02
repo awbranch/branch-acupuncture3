@@ -1,10 +1,11 @@
 import { createClient, groq } from 'next-sanity';
+import { HomePageMeta } from '@/types/homePageMeta';
+import { AboutPageMeta } from '@/types/aboutPageMeta';
 import { Service } from '@/types/service';
 import { Review } from '@/types/review';
 import { Element } from '@/types/element';
 import { Qualification } from '@/types/qualification';
 import { Question } from '@/types/question';
-import { AboutPage } from '@/types/aboutPage';
 
 function getClient() {
   return createClient({
@@ -81,12 +82,29 @@ export async function getQuestions(): Promise<Question[]> {
   );
 }
 
-export async function getAboutPage(): Promise<AboutPage> {
+export async function getHomePageMeta(): Promise<HomePageMeta> {
+  const client = getClient();
+  return client.fetch(
+    groq`*[_type == "homePage"][0]{
+          hero{
+            title,
+            description,
+            "image":image.asset->url,
+          },
+          text,
+          reviewHeader,
+          reviews[]{
+            name,
+            text
+          }
+        }`,
+  );
+}
+
+export async function getAboutPageMeta(): Promise<AboutPageMeta> {
   const client = getClient();
   return client.fetch(
     groq`*[_type == "aboutPage"][0]{
-          _id,
-          _createdAt,
           name,
           "bioImage": bioImage.asset->url,
           biography,

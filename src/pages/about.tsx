@@ -11,7 +11,7 @@ import ContactForm from '@/components/contactForm/ContactForm';
 import ScheduleAppointment from '@/components/ScheduleAppointment';
 import { smoothScrollTo } from '@/utils/utils';
 import QuoteBox from '@/components/QuoteBox';
-import { getAboutPage } from '@/sanity/utils';
+import { getAboutPageMeta } from '@/sanity/utils';
 import { PortableTextBlock } from 'sanity';
 import RichText from '@/components/RichText';
 
@@ -168,7 +168,7 @@ const About: NextPage = ({
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const meta = await getAboutPage();
+  const meta = await getAboutPageMeta();
 
   return {
     props: {

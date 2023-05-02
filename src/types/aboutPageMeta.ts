@@ -1,8 +1,6 @@
 import { PortableTextBlock } from 'sanity';
 
-export type AboutPage = {
-  _id: string;
-  _createdAt: Date;
+export type AboutPageMeta = {
   name: string;
   bioImage: string;
   biography: PortableTextBlock[];
