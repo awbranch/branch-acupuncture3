@@ -1,60 +1,21 @@
 import type { NextPage, GetStaticProps } from 'next';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Main from '@/layouts/main/Main';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
-import Hero from '@/components/Hero';
 import QuoteBox from '@/components/QuoteBox';
 import RichText from '@/components/RichText';
-import { smoothScrollTo } from '@/utils/utils';
-import { getElements } from '@/sanity/utils';
-import { Element } from '@/types/element';
+import { getTheoryPage } from '@/sanity/utils';
+import { TheoryPage } from '@/types/theoryPage';
+import HeroHeader from '@/components/HeroHeader';
 
-interface Props {
-  elements: Array<Element>;
-}
-
-const Theory: NextPage = ({ elements }: Props) => {
+const Theory: NextPage = ({ hero, elements, quote }: TheoryPage) => {
   return (
     <Main colorInvert={true}>
-      <Hero image="/hero/theory.jpg">
-        <Typography variant="h1" sx={{ color: 'common.white' }}>
-          Five Element Theory
-        </Typography>
-        <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
-          East Asian Medicine views the body as a small universe with five major
-          interconnected systems. Each system is represented by an element:
-          Wood, Fire, Earth, Metal, and Water. Five elements theory is a
-          framework used in East Asian Medicine to explain how the world world
-          and weather around us influence us and how body organs Each element is
-          associated with specific body organs, color, taste, emotion, and year
-          season, among other things.{' '}
-        </Typography>
-        <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
-          From an East Asian Medicine perspective, understanding which of the
-          five elements has a dominant effect on you can give you insight into
-          your strengths and weaknesses. When our body is in balance, these
-          systems flow smoothly. When one or more systems fall out of balance,
-          symptoms emerge, resulting in illness. Acupuncture and East Asian
-          modalities can restore the proper flow between systems, relieving
-          ailments and imbalances.{' '}
-        </Typography>
-        <Box component="div" sx={{ m: 5, textAlign: 'center' }}>
-          <Button
-            component={'a'}
-            variant="contained"
-            color="secondary"
-            size="large"
-            sx={{ textTransform: 'uppercase' }}
-            onClick={() => smoothScrollTo('elements', 0)}
-          >
-            More
-          </Button>
-        </Box>
-      </Hero>
-      <Container id="elements">
+      <HeroHeader colorInvert={true} scrollTo={elements[0].slug} {...hero} />
+
+      <Container>
         {elements.map((element) => (
           <Section key={element._id} id={element.slug}>
             <Box sx={{ textAlign: 'center' }}>
@@ -77,20 +38,17 @@ const Theory: NextPage = ({ elements }: Props) => {
           </Section>
         ))}
 
-        <QuoteBox
-          text="Acupuncture is the best preventative medicine on the planet."
-          author="Lonny Jarret, author of Nourishing Destiny"
-        />
+        <QuoteBox text={quote.text} author={quote.author} />
       </Container>
     </Main>
   );
 };
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  const elements = await getElements();
+export const getStaticProps: GetStaticProps<TheoryPage> = async () => {
+  const props = await getTheoryPage();
 
   return {
-    props: { elements },
+    props,
   };
 };
 

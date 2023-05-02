@@ -1,7 +1,6 @@
 import type { NextPage, GetStaticProps } from 'next';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import NextLink from 'next/link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Main from '@/layouts/main/Main';
@@ -11,51 +10,43 @@ import ContactForm from '@/components/contactForm/ContactForm';
 import ScheduleAppointment from '@/components/ScheduleAppointment';
 import { smoothScrollTo } from '@/utils/utils';
 import QuoteBox from '@/components/QuoteBox';
-import { getAboutPageMeta } from '@/sanity/utils';
-import { PortableTextBlock } from 'sanity';
+import { getAboutPage, getSiteSettings } from '@/sanity/utils';
 import RichText from '@/components/RichText';
+import { AboutPage } from '@/types/aboutPage';
+import { FormConfig } from '@/types/formConfig';
 
 interface Props {
-  name: string;
-  bioImage: string;
-  biography: PortableTextBlock[];
-  certifications: PortableTextBlock[];
-  education: PortableTextBlock[];
-  history: PortableTextBlock[];
-  officeImage: string;
+  pageProps: AboutPage;
+  contactConfig: FormConfig;
 }
 
-const About: NextPage = ({
-  name,
-  bioImage,
-  biography,
-  certifications,
-  education,
-  history,
-  officeImage,
-}: Props) => {
+const About: NextPage = ({ pageProps, contactConfig }: Props) => {
   return (
     <Main>
       <Container>
-        <Typography variant="h1">{name}</Typography>
+        <Typography variant="h1">{pageProps.name}</Typography>
 
         <Stack
           direction={{ xs: 'column', md: 'row' }}
           spacing={4}
           alignItems="flex-start"
         >
-          <Box component="img" src={bioImage} width={{ xs: 1, md: 390 }} />
-          <RichText document={biography} />
+          <Box
+            component="img"
+            src={pageProps.bioImage}
+            width={{ xs: 1, md: 390 }}
+          />
+          <RichText document={pageProps.biography} />
         </Stack>
 
         <Section id="certifications">
           <Typography variant="h2">Certifications</Typography>
-          <RichText document={certifications} />
+          <RichText document={pageProps.certifications} />
         </Section>
 
         <Section id="education">
           <Typography variant="h2">Education</Typography>
-          <RichText document={education} />
+          <RichText document={pageProps.education} />
         </Section>
 
         <Section id="office">
@@ -125,11 +116,11 @@ const About: NextPage = ({
 
         <Section id="history">
           <Typography variant="h2">History</Typography>
-          <RichText document={history} />
+          <RichText document={pageProps.history} />
           <Box
             component={'img'}
             display={'block'}
-            src={officeImage}
+            src={pageProps.officeImage}
             sx={{ mt: 5 }}
             height={1}
             width={1}
@@ -150,35 +141,27 @@ const About: NextPage = ({
 
         <Section id="contact">
           <Typography variant="h2">Contact Us</Typography>
-          <Typography variant="body1" sx={{ mb: 5 }}>
-            Please use this form to ask any questions of Branch Acupuncture
-            Center. If you are interested in becoming a new client, please use
-            our{' '}
-            <Link href="/appointments#new-client-signup" component={NextLink}>
-              new client signup
-            </Link>{' '}
-            form instead.
-          </Typography>
-          <ContactForm type="message" scrollToId="contact" />
+          <RichText document={contactConfig.instructions} />
+          <ContactForm
+            type="message"
+            successMessage={contactConfig.confirmation}
+            scrollToId="contact"
+          />
         </Section>
-        <QuoteBox text="Health is the greatest possession." author="Lao Tzu" />
+        <QuoteBox text={pageProps.quote.text} author={pageProps.quote.author} />
       </Container>
     </Main>
   );
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const meta = await getAboutPageMeta();
+  const pageProps = await getAboutPage();
+  const settings = await getSiteSettings();
 
   return {
     props: {
-      name: meta.name,
-      bioImage: meta.bioImage,
-      biography: meta.biography,
-      certifications: meta.certifications,
-      education: meta.education,
-      history: meta.history,
-      officeImage: meta.officeImage,
+      pageProps,
+      contactConfig: settings.contact,
     },
   };
 };

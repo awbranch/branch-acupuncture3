@@ -1,30 +1,29 @@
-const review = {
-  name: 'review',
-  title: 'Review',
+const quote = {
+  name: 'quote',
+  title: 'Quote',
   type: 'object',
   fields: [
     {
       name: 'text',
       title: 'Text',
       type: 'text',
-      rows: 6,
-      description: 'The text of the review.',
+      rows: 4,
+      description: 'The text of the quote.',
       validation: (Rule) => Rule.required(),
     },
     {
-      name: 'name',
-      title: 'Name',
+      name: 'author',
+      title: 'Author',
       type: 'string',
-      description: 'The person giving the review.',
+      description: 'The author of the quote.',
       validation: (Rule) => Rule.required(),
     },
   ],
   preview: {
     select: {
-      title: 'text',
-      subtitle: 'name',
+      title: 'author',
     },
   },
 };
 
-export default review;
+export default quote;

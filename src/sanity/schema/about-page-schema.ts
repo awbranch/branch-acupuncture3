@@ -97,6 +97,12 @@ const aboutPage = {
       type: 'image',
       validation: (Rule) => Rule.required(),
     },
+    {
+      name: 'quote',
+      title: 'Quote',
+      type: 'quote',
+      validation: (Rule) => Rule.required(),
+    },
   ],
   preview: {
     prepare() {

@@ -7,15 +7,21 @@ import SuccessMessage from './components/SuccessMessage';
 import { smoothScrollTo } from '@/utils/utils';
 import type { FormType } from '@/types/formType';
 import type { ContactInfo } from '@/types/contact';
+import { PortableTextBlock } from 'sanity';
 
 type Status = 'start' | 'processing' | 'ok' | 'error';
 
 interface Props {
   type: FormType;
+  successMessage: PortableTextBlock[];
   scrollToId: string;
 }
 
-const ContactForm = ({ type, scrollToId }: Props): JSX.Element => {
+const ContactForm = ({
+  type,
+  successMessage,
+  scrollToId,
+}: Props): JSX.Element => {
   const [status, setStatus] = useState<Status>('start');
   const [statusMessage, setStatusMessage] = useState('');
 
@@ -59,7 +65,7 @@ const ContactForm = ({ type, scrollToId }: Props): JSX.Element => {
       ) : status === 'error' ? (
         <ErrorMessage message={statusMessage} onRetry={onRestart} />
       ) : status === 'ok' ? (
-        <SuccessMessage type={type} onDone={onRestart} />
+        <SuccessMessage message={successMessage} onDone={onRestart} />
       ) : (
         <></>
       )}

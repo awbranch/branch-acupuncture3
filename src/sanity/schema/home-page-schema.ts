@@ -1,6 +1,3 @@
-import hero from './hero-schema';
-import review from './review-schema';
-
 const homePage = {
   name: 'homePage',
   title: 'Home Page',

@@ -12,53 +12,39 @@ import ListItem from '@mui/material/ListItem';
 import Hero from '@/components/Hero';
 import { smoothScrollTo } from '@/utils/utils';
 import ContactForm from '@/components/contactForm/ContactForm';
-import Link from '@mui/material/Link';
 import QuoteBox from '@/components/QuoteBox';
 import RichText from '@/components/RichText';
-import { getQuestions } from '@/sanity/utils';
-import { Question } from '@/types/question';
+import { getAppointmentsPage, getSiteSettings } from '@/sanity/utils';
+import { AppointmentsPage } from '@/types/appointmentsPage';
+import { FormConfig } from '@/types/formConfig';
 
 interface Props {
-  questions: Array<Question>;
-  seeingClients: boolean;
+  pageProps: AppointmentsPage;
+  signupConfig: FormConfig;
 }
 
-const Appointments: NextPage = ({ questions, seeingClients }: Props) => {
+const Appointments: NextPage = ({ pageProps, signupConfig }: Props) => {
   return (
     <Main colorInvert={true}>
-      <Hero image="/hero/appointments.jpg">
+      <Hero image={pageProps.hero.image}>
         <Typography variant="h1" sx={{ color: 'common.white' }}>
-          Appointments
+          {pageProps.hero.title}
         </Typography>
-        <Typography variant="body1" sx={{ color: 'common.white' }} paragraph>
-          Branch Acupuncture Center now uses an online booking system for
-          scheduling appointments. If you are a new patient or have not signed
-          up for our new booking system, please select “New Client Signup”
-          below. Existing clients can select “Book Now”
-        </Typography>
+        <RichText document={pageProps.hero.description} colorInvert={true} />
 
-        {!seeingClients && (
+        {pageProps.closed && (
           <Box
             sx={{
               backgroundColor: 'text.highlight',
               opacity: 0.9,
               mt: 4,
               px: 4,
-              py: 2,
+              pt: 2,
+              pb: 0.5,
+              textAlign: 'center',
             }}
           >
-            <Typography
-              variant="body1"
-              sx={{ color: 'common.white', textAlign: 'center' }}
-            >
-              Branch Acupuncture is not currently seeing clients.
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{ color: 'common.white', textAlign: 'center' }}
-            >
-              Please check back later.
-            </Typography>
+            <RichText document={pageProps.closedMessage} colorInvert={true} />
           </Box>
         )}
 
@@ -66,10 +52,10 @@ const Appointments: NextPage = ({ questions, seeingClients }: Props) => {
           direction={{ xs: 'column', sm: 'row' }}
           spacing={{ xs: 2, sm: 10 }}
           justifyContent="center"
-          sx={{ mt: seeingClients ? 20 : 5, mb: 10, mx: 'auto' }}
+          sx={{ mt: pageProps.closed ? 5 : 20, mb: 10, mx: 'auto' }}
         >
           <Button
-            disabled={!seeingClients}
+            disabled={pageProps.closed}
             component={'a'}
             variant="contained"
             color="secondary"
@@ -81,7 +67,7 @@ const Appointments: NextPage = ({ questions, seeingClients }: Props) => {
           </Button>
 
           <Button
-            disabled={!seeingClients}
+            disabled={pageProps.closed}
             component={'a'}
             variant="contained"
             color="secondary"
@@ -97,30 +83,22 @@ const Appointments: NextPage = ({ questions, seeingClients }: Props) => {
       </Hero>
 
       <Container>
-        {seeingClients && (
+        {!pageProps.closed && (
           <Section id="new-client-signup">
             <Typography variant="h2">New Client Signup</Typography>
-            <Typography variant="body1" paragraph sx={{ mb: 5 }}>
-              If you are a new client of Branch Acupuncture center, or are
-              unable to use our{' '}
-              <Link
-                href="https://mollybranch.janeapp.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                online booking system
-              </Link>
-              , please fill in the following form with your name, phone number,
-              email address, and a brief message of the service you are seeking.
-            </Typography>
-            <ContactForm type="signup" scrollToId="new-client-signup" />
+            <RichText document={signupConfig.instructions} />
+            <ContactForm
+              type="signup"
+              successMessage={signupConfig.confirmation}
+              scrollToId="new-client-signup"
+            />
           </Section>
         )}
 
         <Section id="questions">
           <Typography variant="h2">Questions</Typography>
           <List>
-            {questions.map((question) => (
+            {pageProps.questions.map((question) => (
               <ListItem
                 key={question._id}
                 sx={{ display: 'block', px: 0, pt: 3, pb: 1 }}
@@ -134,22 +112,21 @@ const Appointments: NextPage = ({ questions, seeingClients }: Props) => {
           </List>
         </Section>
 
-        <QuoteBox
-          text="The natural healing force within each of us is the greatest force in getting well."
-          author="Hippocrates"
-        />
+        <QuoteBox text={pageProps.quote.text} author={pageProps.quote.author} />
       </Container>
     </Main>
   );
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const questions = await getQuestions();
-
-  const seeingClients = process.env.SEEING_CLIENTS !== 'false';
+  const pageProps = await getAppointmentsPage();
+  const settings = await getSiteSettings();
 
   return {
-    props: { questions, seeingClients },
+    props: {
+      pageProps,
+      signupConfig: settings.signup,
+    },
   };
 };
 

@@ -1,17 +1,27 @@
 import React from 'react';
 import { Page, Logo, Title, Text, Para } from './elements';
 import type { ContactInfo } from '@/types/contact';
+import { PortableTextBlock } from 'sanity';
+import EmailText from './EmailText';
 
 interface Props {
   info: ContactInfo;
   logoPath: string;
   submitted: string;
+  messageConfirmation: PortableTextBlock[];
+  messageSalutation: PortableTextBlock[];
+  signupConfirmation: PortableTextBlock[];
+  signupSalutation: PortableTextBlock[];
 }
 
 const ContactFormConfirmationEmail = ({
   info,
   logoPath,
   submitted,
+  messageConfirmation,
+  messageSalutation,
+  signupConfirmation,
+  signupSalutation,
 }: Props): JSX.Element => {
   return (
     <Page>
@@ -24,22 +34,18 @@ const ContactFormConfirmationEmail = ({
       <Text>{submitted}</Text>
 
       <Para>Dear {info.name},</Para>
+
       {info.type === 'message' ? (
-        <Para>
-          Thank you for contacting the Branch Acupuncture Center. Your question
-          will be reviewed and replied to via email as soon as possible. We
-          appreciate your business.
-        </Para>
+        <>
+          <EmailText document={messageConfirmation} />
+          <EmailText document={messageSalutation} />
+        </>
       ) : (
-        <Para>
-          Thank you for requesting to become a Branch Acupuncture Center client.
-          Your request will be reviewed and replied to via email as soon as
-          possible. We appreciate your business.
-        </Para>
+        <>
+          <EmailText document={signupConfirmation} />
+          <EmailText document={signupSalutation} />
+        </>
       )}
-      <Para>Sincerely,</Para>
-      <Text>Molly Branch Shill</Text>
-      <Text>Branch Acupuncture Center</Text>
     </Page>
   );
 };

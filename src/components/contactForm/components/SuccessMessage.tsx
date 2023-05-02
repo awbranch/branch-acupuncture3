@@ -1,16 +1,16 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
-import type { FormType } from '@/types/formType';
+import { PortableTextBlock } from 'sanity';
+import RichText from '@/components/RichText';
 
 interface Props {
-  type: FormType;
+  message: PortableTextBlock[];
   onDone: () => void;
 }
 
-const SuccessMessage = ({ type, onDone }: Props): JSX.Element => {
+const SuccessMessage = ({ message, onDone }: Props): JSX.Element => {
   const theme = useTheme();
 
   return (
@@ -27,23 +27,10 @@ const SuccessMessage = ({ type, onDone }: Props): JSX.Element => {
         py: 3,
       }}
     >
-      {type === 'message' ? (
-        <Typography variant="body1" paragraph>
-          Thank you for contacting the Branch Acupuncture Center. Your question
-          will be reviewed and replied to via email as soon as possible.
-        </Typography>
-      ) : (
-        <Typography variant="body1" paragraph>
-          Thank you for requesting to become a Branch Acupuncture Center client.
-          Your request will be reviewed and replied to via email as soon as
-          possible.
-        </Typography>
-      )}
-      <Typography variant="body1" paragraph sx={{ mb: 5 }}>
-        We appreciate your business.
-      </Typography>
+      <RichText document={message} />
+
       <Button
-        sx={{ minWidth: 150 }}
+        sx={{ minWidth: 150, mt: 5 }}
         component={'a'}
         variant="contained"
         color="primary"

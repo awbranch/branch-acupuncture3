@@ -1,7 +1,7 @@
 const element = {
   name: 'element',
   title: 'Element',
-  type: 'document',
+  type: 'object',
   fields: [
     {
       name: 'name',
@@ -12,8 +12,7 @@ const element = {
     {
       name: 'slug',
       title: 'Slug',
-      type: 'slug',
-      options: { source: 'name' },
+      type: 'string',
       validation: (Rule) => Rule.required(),
     },
     {
@@ -46,13 +45,6 @@ const element = {
       title: 'Caption',
       type: 'string',
       validation: (Rule) => Rule.required(),
-    },
-  ],
-  orderings: [
-    {
-      title: 'Oldest to Newest',
-      name: 'createdAsc',
-      by: [{ field: '_createdAt', direction: 'asc' }],
     },
   ],
 };

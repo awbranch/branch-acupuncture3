@@ -1,7 +1,7 @@
 const question = {
   name: 'question',
   title: 'Question',
-  type: 'document',
+  type: 'object',
   fields: [
     {
       name: 'question',
@@ -12,8 +12,7 @@ const question = {
     {
       name: 'slug',
       title: 'Slug',
-      type: 'slug',
-      options: { source: 'question' },
+      type: 'string',
       validation: (Rule) => Rule.required(),
     },
     {

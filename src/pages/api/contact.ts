@@ -6,6 +6,7 @@ import ContactFormConfirmationEmail from 'components/email/ContactFormConfirmati
 import { messageSchema, signupSchema } from 'utils/contactInfoSchema';
 import path from 'path';
 import { ContactInfo } from '@/types/contact';
+import { getSiteSettings } from '@/sanity/utils';
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -37,6 +38,8 @@ const handler = async (req, res) => {
         res.status(500).send({ message: 'Invalid Message' });
         return;
       }
+
+      const siteSettings = await getSiteSettings();
 
       console.log(JSON.stringify(info, null, 3));
       let logoId = 'email-header@mollybranch.com';
@@ -85,6 +88,10 @@ const handler = async (req, res) => {
             info,
             logoPath: `cid:${logoId}`,
             submitted: new Date().toLocaleDateString(),
+            messageConfirmation: siteSettings.contact.confirmation,
+            messageSalutation: siteSettings.contact.salutation,
+            signupConfirmation: siteSettings.signup.confirmation,
+            signupSalutation: siteSettings.signup.salutation,
           }),
         ),
         attachments: [

@@ -1,11 +1,10 @@
 import { createClient, groq } from 'next-sanity';
-import { HomePageMeta } from '@/types/homePageMeta';
-import { AboutPageMeta } from '@/types/aboutPageMeta';
-import { Service } from '@/types/service';
-import { Review } from '@/types/review';
-import { Element } from '@/types/element';
-import { Qualification } from '@/types/qualification';
-import { Question } from '@/types/question';
+import { HomePage } from '@/types/homePage';
+import { AboutPage } from '@/types/aboutPage';
+import { ServicesPage } from '@/types/servicesPage';
+import { TheoryPage } from '@/types/theoryPage';
+import { AppointmentsPage } from '@/types/appointmentsPage';
+import { SiteSettings } from '@/types/siteSettings';
 
 function getClient() {
   return createClient({
@@ -15,74 +14,7 @@ function getClient() {
   });
 }
 
-export async function getServices(): Promise<Service[]> {
-  const client = getClient();
-  return client.fetch(
-    groq`*[_type == "service"]{
-          _id,
-          _createdAt,
-          name,
-          "slug": slug.current,
-          description,
-          "image": image.asset->url,
-          caption
-        } | order(_createdAt asc)`,
-  );
-}
-
-export async function getReviews(): Promise<Review[]> {
-  const client = getClient();
-  return client.fetch(
-    groq`*[_type == "review"]{
-          _id,
-          _createdAt,
-          name,
-          text
-        }`,
-  );
-}
-
-export async function getElements(): Promise<Element[]> {
-  const client = getClient();
-  return client.fetch(
-    groq`*[_type == "element"]{
-          _id,
-          _createdAt,
-          name,
-          "slug": slug.current,
-          description,
-          "image": image.asset->url,
-          caption
-        } | order(_createdAt asc)`,
-  );
-}
-
-export async function getQualifications(): Promise<Qualification[]> {
-  const client = getClient();
-  return client.fetch(
-    groq`*[_type == "qualification"]{
-          _id,
-          _createdAt,
-          text,
-          type,
-        } | order(_createdAt asc)`,
-  );
-}
-
-export async function getQuestions(): Promise<Question[]> {
-  const client = getClient();
-  return client.fetch(
-    groq`*[_type == "question"]{
-          _id,
-          _createdAt,
-          question,
-          "slug": slug.current,
-          answer
-        } | order(_createdAt asc)`,
-  );
-}
-
-export async function getHomePageMeta(): Promise<HomePageMeta> {
+export async function getHomePage(): Promise<HomePage> {
   const client = getClient();
   return client.fetch(
     groq`*[_type == "homePage"][0]{
@@ -101,7 +33,57 @@ export async function getHomePageMeta(): Promise<HomePageMeta> {
   );
 }
 
-export async function getAboutPageMeta(): Promise<AboutPageMeta> {
+export async function getServicesPage(): Promise<ServicesPage> {
+  const client = getClient();
+  return client.fetch(
+    groq`*[_type == "servicesPage"][0]{
+          hero{
+            title,
+            description,
+            "image":image.asset->url,
+          },
+          services[]{
+            _id,
+            name,
+            slug,
+            description,
+            "image": image.asset->url,
+            caption
+          },
+          quote{
+            text,
+            author
+          }
+        }`,
+  );
+}
+
+export async function getTheoryPage(): Promise<TheoryPage> {
+  const client = getClient();
+  return client.fetch(
+    groq`*[_type == "theoryPage"][0]{
+          hero{
+            title,
+            description,
+            "image":image.asset->url,
+          },
+          elements[]{
+            _id,
+            name,
+            slug,
+            description,
+            "image": image.asset->url,
+            caption
+          },
+          quote{
+            text,
+            author
+          }
+        }`,
+  );
+}
+
+export async function getAboutPage(): Promise<AboutPage> {
   const client = getClient();
   return client.fetch(
     groq`*[_type == "aboutPage"][0]{
@@ -111,7 +93,54 @@ export async function getAboutPageMeta(): Promise<AboutPageMeta> {
           certifications,
           education,
           history,
-          "officeImage": officeImage.asset->url
+          "officeImage": officeImage.asset->url,
+          quote{
+            text,
+            author
+          }
+        }`,
+  );
+}
+
+export async function getAppointmentsPage(): Promise<AppointmentsPage> {
+  const client = getClient();
+  return client.fetch(
+    groq`*[_type == "appointmentsPage"][0]{
+          hero{
+            title,
+            description,
+            "image":image.asset->url,
+          },
+          closed,
+          closedMessage,
+          questions[]{
+            _id,
+            question,
+            slug,
+            answer
+          },
+          quote{
+            text,
+            author
+          }
+        }`,
+  );
+}
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  const client = getClient();
+  return client.fetch(
+    groq`*[_type == "settings"][0]{
+          contact{
+            instructions,
+            confirmation,
+            salutation
+          },
+          signup{
+            instructions,
+            confirmation,
+            salutation
+          }
         }`,
   );
 }

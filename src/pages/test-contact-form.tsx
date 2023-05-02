@@ -8,8 +8,15 @@ import Container from 'components/Container';
 import ContactFormConfirmationEmail from 'components/email/ContactFormConfirmationEmail';
 import ContactFormSubmittedEmail from 'components/email/ContactFormSubmittedEmail';
 import { FormType } from '@/types/formType';
+import { GetStaticProps } from 'next';
+import { getSiteSettings } from '@/sanity/utils';
+import { SiteSettings } from '@/types/siteSettings';
 
-const TestContactForm: NextPage = () => {
+interface Props {
+  siteSettings: SiteSettings;
+}
+
+const TestContactForm: NextPage = ({ siteSettings }: Props) => {
   const [formType, setFormType] = useState<FormType>('message');
   const [userType, setUserType] = useState('customer');
 
@@ -70,6 +77,10 @@ const TestContactForm: NextPage = () => {
           info={info}
           logoPath="email-header.png"
           submitted={new Date().toLocaleDateString()}
+          messageConfirmation={siteSettings.contact.confirmation}
+          messageSalutation={siteSettings.contact.salutation}
+          signupConfirmation={siteSettings.signup.confirmation}
+          signupSalutation={siteSettings.signup.salutation}
         />
       ) : (
         <ContactFormSubmittedEmail
@@ -80,6 +91,16 @@ const TestContactForm: NextPage = () => {
       )}
     </Container>
   );
+};
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const siteSettings = await getSiteSettings();
+
+  return {
+    props: {
+      siteSettings,
+    },
+  };
 };
 
 export default TestContactForm;

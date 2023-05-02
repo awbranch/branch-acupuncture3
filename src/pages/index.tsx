@@ -9,12 +9,12 @@ import ReviewCarousel from '@/components/ReviewCarousel';
 import RichText from '@/components/RichText';
 import ServiceCard from '@/components/ServiceCard';
 import ScheduleAppointment from '@/components/ScheduleAppointment';
-import { getHomePageMeta, getServices } from '@/sanity/utils';
+import { getHomePage, getServicesPage } from '@/sanity/utils';
 import { Service } from '@/types/service';
-import { HomePageMeta } from '@/types/homePageMeta';
+import { HomePage } from '@/types/homePage';
 
 interface Props {
-  meta: HomePageMeta;
+  meta: HomePage;
   services: Array<Service>;
 }
 
@@ -60,11 +60,11 @@ const Home: NextPage = ({ meta, services }: Props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const meta = await getHomePageMeta();
-  const services = await getServices();
+  const homePage = await getHomePage();
+  const servicesPage = await getServicesPage();
 
   return {
-    props: { meta, services },
+    props: { meta: homePage, services: servicesPage.services },
   };
 };
 

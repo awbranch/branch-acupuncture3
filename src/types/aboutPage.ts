@@ -1,6 +1,7 @@
 import { PortableTextBlock } from 'sanity';
+import { Quote } from '@/types/quote';
 
-export type AboutPageMeta = {
+export type AboutPage = {
   name: string;
   bioImage: string;
   biography: PortableTextBlock[];
@@ -8,4 +9,5 @@ export type AboutPageMeta = {
   education: PortableTextBlock[];
   history: PortableTextBlock[];
   officeImage: string;
+  quote: Quote;
 };
