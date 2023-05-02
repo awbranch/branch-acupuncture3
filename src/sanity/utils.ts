@@ -131,6 +131,10 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   const client = getClient();
   return client.fetch(
     groq`*[_type == "settings"][0]{
+          address,
+          phone,
+          mapLink,
+          mapEmbedLink,
           contact{
             instructions,
             confirmation,

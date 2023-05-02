@@ -1,6 +1,7 @@
 import { defineConfig } from 'sanity';
 import { deskTool } from 'sanity/desk';
 import { visionTool } from '@sanity/vision';
+import { media } from 'sanity-plugin-media';
 import { vercelDeployTool } from 'sanity-plugin-vercel-deploy';
 import homePage from '@/sanity/schema/home-page-schema';
 import servicesPage from '@/sanity/schema/services-page-schema';
@@ -81,6 +82,7 @@ const config = defineConfig({
       defaultDataset: 'production',
       defaultApiVersion: 'v2021-10-21',
     }),
+    media(),
     vercelDeployTool(),
   ],
   schema: {
