@@ -6,16 +6,14 @@ import { TheoryPage } from '@/types/theoryPage';
 import { AppointmentsPage } from '@/types/appointmentsPage';
 import { SiteSettings } from '@/types/siteSettings';
 
-function getClient() {
-  return createClient({
-    projectId: '5wlp5gt3',
-    dataset: 'production',
-    apiVersion: '2021-10-21',
-  });
-}
+export const client = createClient({
+  projectId: '5wlp5gt3',
+  dataset: 'production',
+  apiVersion: '2021-10-21',
+});
 
 export async function getHomePage(): Promise<HomePage> {
-  const client = getClient();
+  console.log('Fetching Home Page from Sanity.io');
   return client.fetch(
     groq`*[_type == "homePage"][0]{
           hero{
@@ -34,7 +32,7 @@ export async function getHomePage(): Promise<HomePage> {
 }
 
 export async function getServicesPage(): Promise<ServicesPage> {
-  const client = getClient();
+  console.log('Fetching Services Page from Sanity.io');
   return client.fetch(
     groq`*[_type == "servicesPage"][0]{
           hero{
@@ -59,7 +57,7 @@ export async function getServicesPage(): Promise<ServicesPage> {
 }
 
 export async function getTheoryPage(): Promise<TheoryPage> {
-  const client = getClient();
+  console.log('Fetching Theory Page from Sanity.io');
   return client.fetch(
     groq`*[_type == "theoryPage"][0]{
           hero{
@@ -84,7 +82,7 @@ export async function getTheoryPage(): Promise<TheoryPage> {
 }
 
 export async function getAboutPage(): Promise<AboutPage> {
-  const client = getClient();
+  console.log('Fetching About Page from Sanity.io');
   return client.fetch(
     groq`*[_type == "aboutPage"][0]{
           name,
@@ -103,7 +101,7 @@ export async function getAboutPage(): Promise<AboutPage> {
 }
 
 export async function getAppointmentsPage(): Promise<AppointmentsPage> {
-  const client = getClient();
+  console.log('Fetching Appointments Page from Sanity.io');
   return client.fetch(
     groq`*[_type == "appointmentsPage"][0]{
           hero{
@@ -128,7 +126,7 @@ export async function getAppointmentsPage(): Promise<AppointmentsPage> {
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
-  const client = getClient();
+  console.log('Fetching Site Settings from Sanity.io');
   return client.fetch(
     groq`*[_type == "settings"][0]{
           address,
