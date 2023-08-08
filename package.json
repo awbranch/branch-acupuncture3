@@ -18,6 +18,7 @@
     "@sanity/orderable-document-list": "^1.0.4",
     "@sanity/vision": "3.9.1",
     "@types/node": "18.7.14",
+    "@types/nodemailer": "^6.4.9",
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
     "dotenv": "^16.0.3",
