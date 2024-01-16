@@ -119,10 +119,8 @@ const Footer = (): JSX.Element => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Typography variant="body1">633 Kreag Road</Typography>
-                      <Typography variant="body1">
-                        Pittsford, NY 14534
-                      </Typography>
+                      <Typography variant="body1">Office Closed</Typography>
+                      <Typography variant="body1">Indefinitely</Typography>
                     </Link>
                   </Box>
                 </Stack>
@@ -135,7 +133,7 @@ const Footer = (): JSX.Element => {
                     sx={{ mt: '8px' }}
                   />
                   <Box>
-                    <Typography variant="body1">(585) 256-3980</Typography>
+                    <Typography variant="body1">(###) ###-####</Typography>
                   </Box>
                 </Stack>
               </Grid>
